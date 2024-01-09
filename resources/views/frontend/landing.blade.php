@@ -129,24 +129,24 @@
                             </button>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @if (Request::is('/')) active @endif"
+                            <a onclick="showLoadingIndicator()" class="nav-link @if (Request::is('/')) active @endif"
                                 href="{{ url('/') }}"></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#jadwal"></a>
+                            <a onclick="showLoadingIndicator()" class="nav-link" href="#jadwal"></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @if (Request::is('/')) active @endif"
+                            <a onclick="showLoadingIndicator()" class="nav-link @if (Request::is('/')) active @endif"
                                 href="{{ url('/') }}">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#kegiatan">Kegiatan</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('front-absensi') }}">Absensi</a>
+                            <a onclick="showLoadingIndicator()" class="nav-link" href="{{ url('front-absensi') }}">Absensi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('login') }}">Login</a>
+                            <a onclick="showLoadingIndicator()" class="nav-link" href="{{ url('login') }}">Login</a>
                         </li>
                     </ul>
                 </div>
@@ -155,7 +155,7 @@
     </header>
 
     <div class="banner">
-        <div class="container">
+        <div class="container" id="kegiatan">
             <div class="row">
                 <div class="col-lg-12 mt-4">
                     <h2>Aplikasi Kegiatan & Laporan</h2>

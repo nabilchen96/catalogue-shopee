@@ -197,11 +197,8 @@
                     </div>
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
                         <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
-                            Developed by Unit IT Politeknik Penerbangan Palembang <br>
-                            {{-- Distributed by  --}}
-                            <a href="https://poltekbangplg.ac.id/" target="_blank">
-                                poltekbangplg.ac.id
-                            </a>
+                            Developed by <a href="https://porkaone.com">Nabil Putra</a> <br>
+                            Ikatan Adhyaksa Dharmakarini Kaur
                         </span>
                     </div>
                 </footer>
