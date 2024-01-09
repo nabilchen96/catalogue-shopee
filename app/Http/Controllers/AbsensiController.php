@@ -29,13 +29,13 @@ class AbsensiController extends Controller
                     'an.jabatan'
                 )
                 ->orderBy('a.id', 'DESC')
-                ->get();
+                ->paginate(10);
         } else {
             $absensi = $absensi->select(
                         'a.*',
                         'an.nama_lengkap', 
                         'an.jabatan'
-                    )->orderBy('a.id', 'DESC')->get();
+                    )->orderBy('a.id', 'DESC')->paginate(10);
         }
 
         return view('backend.absensi.index', [

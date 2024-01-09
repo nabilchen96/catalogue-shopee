@@ -146,7 +146,6 @@
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                            {{-- <img src="{{ asset('mountain.png') }}" style="object-fit: cover;" alt="profile" /> --}}
                             <i class="bi bi-person-circle" style="font-size: 30px !important;"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"

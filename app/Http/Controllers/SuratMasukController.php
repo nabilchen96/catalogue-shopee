@@ -21,7 +21,7 @@ class SuratMasukController extends Controller
         if ($q == '' && $tgl) {
             $surat_masuk = $surat_masuk
                 ->orderBy('id', 'DESC')
-                ->where('tanggal_surat', $tgl)->get();
+                ->where('tanggal_surat', $tgl)->paginate(10);
 
         } elseif ($tgl == '' && $q) {
             $surat_masuk = $surat_masuk
@@ -30,7 +30,7 @@ class SuratMasukController extends Controller
                 ->orWhere('alamat_pengirim', 'like', '%' . $q . '%')
                 ->orWhere('perihal', 'like', '%' . $q . '%')
                 ->orWhere('keterangan', 'like', '%' . $q . '%')
-                ->orWhere('nomor_agenda', 'like', '%' . $q . '%')->get();
+                ->orWhere('nomor_agenda', 'like', '%' . $q . '%')->paginate(10);
 
         } elseif ($q && $tgl) {
             $surat_masuk = $surat_masuk
@@ -45,10 +45,10 @@ class SuratMasukController extends Controller
                         ->orWhere('nomor_agenda', 'like', '%' . $q . '%');
                 })
                 ->orderBy('id', 'DESC')
-                ->get();
+                ->paginate(10);
 
         } else {
-            $surat_masuk = $surat_masuk->orderBy('id', 'DESC')->get();
+            $surat_masuk = $surat_masuk->orderBy('id', 'DESC')->paginate(10);
 
         }
 

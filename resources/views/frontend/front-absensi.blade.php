@@ -95,6 +95,9 @@
                             </div>
                             <br>
                         </form>
+                        <a href="{{ url('/') }}" style="text-decoration: none;" type="submit" id="btnLogin" class="text-white btn btn-info btn-lg btn-block">
+                            🏠 Kembali
+                          </a>
                     </div>
                 </div>
             </div>

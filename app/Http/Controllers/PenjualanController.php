@@ -34,11 +34,11 @@ class PenjualanController extends Controller
                     $tgl_akhir
                 ])
                 ->orderBy('p.id', 'DESC')
-                ->get();
+                ->paginate(10);
 
         } else {
 
-            $penjualan = $penjualan->orderBy('p.id', 'DESC')->get();
+            $penjualan = $penjualan->orderBy('p.id', 'DESC')->paginate(10);
         }
 
         // dd($penjualan);

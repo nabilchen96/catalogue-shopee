@@ -22,9 +22,9 @@ class UserController extends Controller
                     ->orWhere('email', 'like', '%' . $q . '%')
                     ->orWhere('no_telp', 'like', '%' . $q . '%')
                     ->orderBy('id', 'DESC')
-                    ->get();
+                    ->paginate(10);
         } else {
-            $user = $user->orderBy('id', 'DESC')->get();
+            $user = $user->orderBy('id', 'DESC')->paginate(10);
         }
 
         return view('backend.users.index', [

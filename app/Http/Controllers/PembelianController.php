@@ -32,11 +32,11 @@ class PembelianController extends Controller
                     $tgl_awal, $tgl_akhir
                 ])
                 ->orderBy('p.id', 'DESC')
-                ->get();
+                ->paginate(10);
 
         } else {
             
-            $pembelian = $pembelian->orderBy('p.id', 'DESC')->get();
+            $pembelian = $pembelian->orderBy('p.id', 'DESC')->paginate(10);
         }
 
         return view('backend.pembelian.index', [

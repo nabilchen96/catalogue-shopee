@@ -77,6 +77,7 @@
                     </div>
                 </div>
             @endforeach
+            {{ $user->links() }}
         </div>
     </div>
     <!-- Modal -->

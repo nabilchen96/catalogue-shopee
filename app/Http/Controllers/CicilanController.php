@@ -33,13 +33,13 @@ class CicilanController extends Controller
                         0,
                     ])
                     ->orderBy('c.tanggal_angsuran', 'DESC')
-                    ->get();
+                    ->paginate(10);
 
         } else {
 
             $cicilan = $cicilan->orderBy('c.tanggal_angsuran', 'DESC')->whereNotIn('c.angsuran', [
                 0,
-            ])->get();
+            ])->paginate(10);
         }
 
         return view('backend.cicilan.index', [

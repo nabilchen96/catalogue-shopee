@@ -33,7 +33,7 @@
     </style>
 @endpush
 @section('content')
-    <a onclick="showLoadingIndicator()" href="{{ url('export-pdf-stok') }}" class="bg-danger act-btn"><i style="font-size: 20px;" class="bi bi-file-earmark-pdf"></i></a>
+    <a href="{{ url('export-pdf-stok') }}" class="bg-danger act-btn"><i style="font-size: 20px;" class="bi bi-file-earmark-pdf"></i></a>
     <div class="row" style="margin-top: -200px;">
         <div class="col-md-12 px-1">
             <div class="row">
@@ -96,6 +96,7 @@
                                         <td>{{ $item->keterangan }}</td>
                                     </tr>
                                 @endforeach
+                                {{ $barang->links() }}
                             </tbody>
                         </table>
                     </div>

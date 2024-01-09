@@ -23,9 +23,9 @@ class InventarisController extends Controller
                 ->orWhere('keterangan', 'like', '%' . $q . '%')
                 ->orWhere('tempat', 'like', '%' . $q . '%')
                 ->orderBy('id', 'DESC')
-                ->get();
+                ->paginate(10);
         } else {
-            $inventaris = $inventaris->orderBy('id', 'DESC')->get();
+            $inventaris = $inventaris->orderBy('id', 'DESC')->paginate(10);
         }
 
         return view('backend.inventaris.index', [

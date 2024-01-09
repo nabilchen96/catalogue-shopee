@@ -21,9 +21,9 @@ class StokController extends Controller
             $barang = $barang->where('nama_barang', 'like', '%' . $q . '%')
                 ->orWhere('keterangan', 'like', '%' . $q . '%')
                 ->orderBy('id', 'DESC')
-                ->get();
+                ->paginate(10);
         } else {
-            $barang = $barang->orderBy('id', 'DESC')->get();
+            $barang = $barang->orderBy('id', 'DESC')->paginate(10);
         }
 
         return view('backend.stok.index', [

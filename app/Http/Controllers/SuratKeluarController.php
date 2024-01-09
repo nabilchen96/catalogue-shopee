@@ -21,7 +21,7 @@ class SuratKeluarController extends Controller
         if ($q == '' && $tgl) {
             $surat_keluar = $surat_keluar
                 ->orderBy('id', 'DESC')
-                ->where('tanggal_surat', $tgl)->get();
+                ->where('tanggal_surat', $tgl)->paginate(10);
 
         } elseif ($tgl == '' && $q) {
             $surat_keluar = $surat_keluar
@@ -30,7 +30,7 @@ class SuratKeluarController extends Controller
                 ->orWhere('tujuan_pengiriman', 'like', '%' . $q . '%')
                 ->orWhere('perihal', 'like', '%' . $q . '%')
                 ->orWhere('keterangan', 'like', '%' . $q . '%')
-                ->orWhere('nomor_agenda', 'like', '%' . $q . '%')->get();
+                ->orWhere('nomor_agenda', 'like', '%' . $q . '%')->paginate(10);
 
         } elseif ($q && $tgl) {
             $surat_keluar = $surat_keluar
@@ -45,10 +45,10 @@ class SuratKeluarController extends Controller
                         ->orWhere('nomor_agenda', 'like', '%' . $q . '%');
                 })
                 ->orderBy('id', 'DESC')
-                ->get();
+                ->paginate(10);
 
         } else {
-            $surat_keluar = $surat_keluar->orderBy('id', 'DESC')->get();
+            $surat_keluar = $surat_keluar->orderBy('id', 'DESC')->paginate(10);
 
         }
 

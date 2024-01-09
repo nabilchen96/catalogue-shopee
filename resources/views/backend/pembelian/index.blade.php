@@ -130,6 +130,7 @@
                     </div>
                 </div>
             @endforeach
+            {{ $pembelian->links() }}
         </div>
     </div>
     <!-- Modal -->

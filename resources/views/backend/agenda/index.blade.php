@@ -82,6 +82,7 @@
                     </div>
                 </div>
             @endforeach
+            {{ $agenda->links() }}
         </div>
     </div>
     <!-- Modal -->

@@ -123,6 +123,7 @@
                     </div>
                 </div>
             @endforeach
+            {{ $anggota->links() }}
         </div>
     </div>
 

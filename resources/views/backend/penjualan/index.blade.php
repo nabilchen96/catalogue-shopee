@@ -152,6 +152,7 @@
                     </div>
                 </div>
             @endforeach
+            {{ $penjualan->links() }}
         </div>
     </div>
     <!-- Modal -->

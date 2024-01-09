@@ -22,9 +22,9 @@ class AgendaController extends Controller
                 ->orWhere('kegiatan', 'like', '%' . $q . '%')
                 ->orWhere('keterangan', 'like', '%' . $q . '%')
                 ->orderBy('id', 'DESC')
-                ->get();
+                ->paginate(10);
         } else {
-            $agenda = $agenda->orderBy('id', 'DESC')->get();
+            $agenda = $agenda->orderBy('id', 'DESC')->paginate(10);
         }
 
         return view('backend.agenda.index', [

@@ -112,6 +112,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                                {{ $absensi->links() }}
                             </tbody>
                         </table>
                     </div>

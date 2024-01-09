@@ -94,6 +94,7 @@
                     </div>
                 </div>
             @endforeach
+            {{ $cicilan->links() }}
         </div>
     </div>
 

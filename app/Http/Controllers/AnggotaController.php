@@ -29,9 +29,9 @@ class AnggotaController extends Controller
                 ->orWhere('keterangan', 'like', '%' . $q . '%')
                 ->orWhere('agama', 'like', '%' . $q . '%')
                 ->orderBy('id', 'DESC')
-                ->get();
+                ->paginate(10);
         } else {
-            $anggota = $anggota->orderBy('id', 'DESC')->get();
+            $anggota = $anggota->orderBy('id', 'DESC')->paginate(10)->get();
         }
 
         return view('backend.anggota.index', [

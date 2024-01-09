@@ -108,7 +108,8 @@
                 <div class="navbar-brand-wrapper d-flex w-100">
                     <img class="icon-image d-none d-lg-block" src="{{ asset('iad.png') }}"
                         style="margin-top: -5px; width: 7%; height: 7%;" alt="">
-                    
+                        <img class="icon-image d-lg-none" src="{{ asset('iad.png') }}"
+                        style="margin-top: 8px; width: 10%; height: 10%;" alt="">
                     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -171,7 +172,7 @@
     </div>
     <div id="jadwal"></div>
     <div class="content-wrapper">
-        <div class="container">
+        <div class="px-3">
             <section class="features-overview" id="features-section">
                 <div class="content-header">
                     <h2>Kegiatan dan Event</h2>
@@ -179,7 +180,7 @@
                         Ikatan Adhyaksa Dharmakarini
                     </h6>
                 </div>
-                <div class="d-md-flex">
+                <div class="">
                     <div class="table-responsive">
                         <table class="table bg-white table-striped" style="width: 100%;">
                             <thead class="bg-primary text-white">
@@ -191,11 +192,13 @@
                                     <th>Keterangan</th>
                                 </tr>
                             </thead>
-                            <?php $agenda = DB::table('agendas')->orderBy('id', 'DESC')->get(); ?>
+                            <?php $agenda = DB::table('agendas')
+                                ->orderBy('id', 'DESC')
+                                ->get(); ?>
                             <tbody>
                                 @foreach ($agenda as $k => $item)
                                     <tr>
-                                        <td>{{ $k+1 }}</td>
+                                        <td>{{ $k + 1 }}</td>
                                         <td>{{ $item->kegiatan }}</td>
                                         <td>
                                             {{ $item->tanggal_mulai }}
@@ -212,9 +215,11 @@
             </section>
         </div>
     </div>
-    <iframe class="embed-responsive"
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15938.708954153537!2d104.6991992!3d-2.9089414!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5e411b86b9a1b4e9!2sPoliteknik%20Penerbangan%20Palembang!5e0!3m2!1sid!2sid!4v1613966893900!5m2!1sid!2sid"
-        height="420" title="poltekbangplg" style="border:0" allowfullscreen></iframe>
+    <iframe
+        class="embed-responsive"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9954462484375!2d103.33184447425226!3d-4.77073959520453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e37e59be87faa95%3A0xb9606ccf917fa103!2sKejaksaan%20Negeri%20kab.%20kaur!5e0!3m2!1sid!2sid!4v1704776625177!5m2!1sid!2sid"
+        height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
 
     <div class="container">
         <footer class="border-top">

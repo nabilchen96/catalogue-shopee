@@ -129,6 +129,7 @@
                     </div>
                 </div>
             @endforeach
+            {{ $surat_keluar->links() }}
         </div>
     </div>
 
