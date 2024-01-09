@@ -6,133 +6,90 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
-        @if (Auth::user()->role == 'Admin')
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                    aria-controls="ui-basic">
-                    <i class="icon-layout menu-icon"></i>
-                    <span class="menu-title" style="margin-top: 7px;">Master</span>
-                    <i style="margin-top: 7px;" class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="ui-basic">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('user') }}">
-                                <span class="menu-title">User</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('matrik') }}">
-                                <span class="menu-title">Matrik</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('jadwal') }}">
-                                <span class="menu-title">Periode</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('unit') }}">
-                                <span class="menu-title">Unit</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        @endif
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('risiko') }}">
-                <i class="bi bi-window-plus menu-icon"></i>
-                <span class="menu-title">Risiko</span>
+            <a class="nav-link" href="{{ url('user') }}">
+                <i class="bi bi-people menu-icon"></i>
+                <span class="menu-title">User</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('agenda') }}">
+                <i class="bi bi-calendar3 menu-icon"></i>
+                <span class="menu-title">Agenda</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#mr" aria-expanded="false" aria-controls="ui-basic">
-                <i class="bi bi-bar-chart menu-icon"></i>
-                <span class="menu-title" style="margin-top: 7px;">Nilai Risiko</span>
+                <i class="bi bi-file-earmark-text menu-icon"></i>
+                <span class="menu-title" style="margin-top: 7px;">Sekretariat</span>
                 <i style="margin-top: 7px;" class="menu-arrow"></i>
             </a>
             <div class="collapse" id="mr">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('profil-risk') }}">
-                            <span class="menu-title">Profil Risiko</span>
+                        <a class="nav-link" href="{{ url('anggota') }}">
+                            <span class="menu-title">Anggota</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('nilai-efektivitas') }}">
-                            <span class="menu-title">Nilai Efektivitas</span>
+                        <a class="nav-link" href="{{ url('surat-masuk') }}">
+                            <span class="menu-title">Surat Masuk</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('kemungkinan') }}">
-                            <span class="menu-title">Kemungkinan</span>
+                        <a class="nav-link" href="{{ url('surat-keluar') }}">
+                            <span class="menu-title">Surat Keluar</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('dampak') }}">
-                            <span class="menu-title">Dampak</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('nilai-risk') }}">
-                            <span class="menu-title">Nilai Risiko</span>
+                        <a class="nav-link" href="{{ url('inventaris') }}">
+                            <span class="menu-title">Inventaris</span>
                         </a>
                     </li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#penanganan" aria-expanded="false"
-                aria-controls="ui-basic">
-                <i class="bi bi-gear menu-icon"></i>
-                <span class="menu-title" style="margin-top: 7px;">Penanganan</span>
+            <a class="nav-link" data-toggle="collapse" href="#eko" aria-expanded="false" aria-controls="ui-basic">
+                <i class="bi bi-cash-coin menu-icon"></i>
+                <span class="menu-title" style="margin-top: 7px;">Ekonomi</span>
                 <i style="margin-top: 7px;" class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="penanganan">
+            <div class="collapse" id="eko">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('rencana-penanganan') }}">
-                            <span class="menu-title">Rencana Pena..</span>
+                        <a class="nav-link" href="{{ url('barang') }}">
+                            <span class="menu-title">Barang</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('pembelian') }}">
+                            <span class="menu-title">Pembelian</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('penjualan') }}">
+                            <span class="menu-title">Penjualan</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('cicilan') }}">
+                            <span class="menu-title">Cicilan</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('stok') }}">
+                            <span class="menu-title">Lap. Stok</span>
                         </a>
                     </li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#penangananx" aria-expanded="false"
-                aria-controls="ui-basic">
-                <i class="bi bi-folder-plus menu-icon"></i>
-                <span class="menu-title" style="margin-top: 7px;">Berkas</span>
-                <i style="margin-top: 7px;" class="menu-arrow"></i>
+            <a class="nav-link" href="{{ url('absensi') }}">
+                <i class="bi bi-geo-alt menu-icon"></i>
+                <span class="menu-title">Absensi</span>
             </a>
-            <div class="collapse" id="penangananx">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('berkas-audit') }}">
-                            <span class="menu-title">Berkas Audit</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('berkas-review') }}">
-                            <span class="menu-title">Berkas Review</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('berkas-evaluasi') }}">
-                            <span class="menu-title">Evaluasi</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
         </li>
-        @if (Auth::user()->role == 'Admin')
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('dokumen-spi') }}">
-                    <i class="bi bi-folder-plus menu-icon"></i>
-                    <span class="menu-title">Dokumen SPI</span>
-                </a>
-            </li>
-        @endif
     </ul>
 </nav>

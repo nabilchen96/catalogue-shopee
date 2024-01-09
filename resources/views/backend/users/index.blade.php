@@ -1,31 +1,37 @@
 @extends('backend.app')
 @push('style')
     <style>
-        #myTable_filter input {
-            height: 29.67px !important;
+        .act-btn {
+            display: block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            text-decoration: none;
+            transition: ease all 0.3s;
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            text-decoration: none !important;
+            z-index: 9;
         }
 
-        #myTable_length select {
-            height: 29.67px !important;
-        }
-
-        .btn {
-            border-radius: 50px !important;
-        }
-
-        .table-striped tbody tr:nth-of-type(odd) {
-            background-color: #9e9e9e21 !important;
-        }
-
-        th,
-        td {
-            white-space: nowrap !important;
+        .act-btn:hover {
+            background: white;
         }
     </style>
 @endpush
 @section('content')
+    <a data-toggle="modal" data-target="#modal" href="#" class="bg-primary act-btn">
+        +
+    </a>
     <div class="row" style="margin-top: -200px;">
-        <div class="col-md-12">
+        <div class="col-md-12 px-1">
             <div class="row">
                 <div class="col-12 col-xl-8 mb-xl-0">
                     <h3 class="font-weight-bold">Data User</h3>
@@ -33,30 +39,44 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12 mt-4">
-            <div class="card w-100">
-                <div class="card-body">
-                    <button type="button" class="btn btn-primary btn-sm mb-4" data-toggle="modal" data-target="#modal">
-                        Tambah
+    <form>
+        <div class="row">
+            <div class="col-12 px-1">
+                <div class="input-group mb-3 mt-3">
+                    <input type="text" style="border: none;" class="form-control" name="q"
+                        placeholder="Type to Search or Clear to See All Data ...">
+                    <button type="submit" style="border: none; height: 38px;"
+                        class="input-group-text bg-primary text-white" id="basic-addon2">
+                        <i class="bi bi-search"></i>
                     </button>
-                    <div class="table-responsive">
-                        <table id="myTable" class="table table-bordered table-striped" style="width: 100%;">
-                            <thead class="bg-primary text-white">
-                                <tr>
-                                    <th width="5%">No</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>NIP</th>
-                                    <th>Role</th>
-                                    <th width="5%"></th>
-                                    <th width="5%"></th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
                 </div>
             </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-12 px-1">
+            @foreach ($user as $item)
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <p><i class="bi bi-person"></i>
+                            <span class="text-danger">
+                                {{ $item->name }}
+                            </span>
+                        </p>
+                        <p><i class="bi bi-envelope"></i> {{ $item->email }} </p>
+                        <p><i class="bi bi-telephone"></i> {{ $item->no_telp }}</p>
+                        <span class="badge bg-info text-white" style="border-radius: 8px;">{{ $item->role }}</span>
+                        <a data-toggle="modal" data-target="#modal" data-item="{{ json_encode($item) }}"
+                            href="javascript:void(0)" class="badge bg-info text-white" style="border-radius: 8px;">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a href="#" onclick="hapusData({{ $item->id }})" class="badge bg-danger text-white"
+                            style="border-radius: 8px;">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
     <!-- Modal -->
@@ -81,8 +101,8 @@
                                 class="form-control form-control-sm" required>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">NIP</label>
-                            <input name="nip" id="nip" type="text" placeholder="NIP"
+                            <label for="exampleInputEmail1">No Telpon</label>
+                            <input name="no_telp" id="no_telp" type="number" placeholder="No Telpon"
                                 class="form-control form-control-sm" required>
                         </div>
                         <div class="form-group">
@@ -94,15 +114,21 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Role</label>
                             <select name="role" class="form-control" id="role" required>
-                                <option value="Admin">Admin</option>
-                                <option value="Pegawai">Pegawai</option>
+                                <option>Admin</option>
+                                <option>Ekonomi</option>
+                                <option>Umum</option>
+                                <option>Sekretariat</option>
+                                <option>Sosial</option>
+                                <option>Pendidikan</option>
                             </select>
                         </div>
 
                     </div>
-                    <div class="modal-footer p-3">
-                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
-                        <button id="tombol_kirim" class="btn btn-primary btn-sm">Submit</button>
+                    <div class="modal-footer p-3 d-flex align-items-end d-flex align-items-end">
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-danger btn-sm mr-1" data-dismiss="modal">Close</button>
+                            <button id="tombol_kirim" class="btn btn-primary btn-sm">Submit</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -110,91 +136,7 @@
     </div>
 @endsection
 @push('script')
-    <script src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
-
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            getData()
-        })
-
-        function getData() {
-            $("#myTable").DataTable({
-                "ordering": false,
-                ajax: '/data-user',
-                processing: true,
-                scrollX: true,
-                scrollCollapse: true,
-                'language': {
-                    'loadingRecords': '&nbsp;',
-                    'processing': 'Loading...'
-                },
-                columns: [{
-                        render: function(data, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1;
-                        }
-                    },
-                    {
-                        data: "name"
-                    },
-                    {
-                        data: "email"
-                    },
-                    {
-                        data: "nip"
-                    },
-                    {
-                        render: function(data, type, row, meta) {
-                            if (row.role == "Admin") {
-                                return `<span class="badge badge-success">${row.role}</span>`
-                            } else if (row.role == "Pegawai") {
-                                return `<span class="badge badge-primary">${row.role}</span>`
-                            }
-                        }
-                    },
-
-                    {
-                        render: function(data, type, row, meta) {
-                            return `<a data-toggle="modal" data-target="#modal"
-                                    data-bs-id=` + (row.id) + ` href="javascript:void(0)">
-                                    <i style="font-size: 1.5rem;" class="text-success bi bi-grid"></i>
-                                </a>`
-                        }
-                    },
-                    {
-                        render: function(data, type, row, meta) {
-                            return `<a href="javascript:void(0)" onclick="hapusData(` + (row
-                                .id) + `)">
-                                    <i style="font-size: 1.5rem;" class="text-danger bi bi-trash"></i>
-                                </a>`
-                        }
-                    },
-                ]
-            })
-        }
-
-        $('#modal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var recipient = button.data('bs-id') // Extract info from data-* attributes
-            var cok = $("#myTable").DataTable().rows().data().toArray()
-
-            let cokData = cok.filter((dt) => {
-                return dt.id == recipient;
-            })
-
-            document.getElementById("form").reset();
-            document.getElementById('id').value = ''
-            $('.error').empty();
-
-            if (recipient) {
-                var modal = $(this)
-                modal.find('#id').val(cokData[0].id)
-                modal.find('#email').val(cokData[0].email)
-                modal.find('#name').val(cokData[0].name)
-                modal.find('#role').val(cokData[0].role)
-                modal.find('#nip').val(cokData[0].nip)
-            }
-        })
-
         form.onsubmit = (e) => {
 
             let formData = new FormData(form);
@@ -220,9 +162,7 @@
                             showConfirmButton: false
                         })
 
-                        $("#modal").modal("hide");
-                        $('#myTable').DataTable().clear().destroy();
-                        getData()
+                        location.reload();
 
                     } else {
 
@@ -263,8 +203,7 @@
                                     showConfirmButton: false
                                 })
 
-                                $('#myTable').DataTable().clear().destroy();
-                                getData();
+                                location.reload();
 
                             } else {
                                 Swal.fire({
@@ -280,5 +219,25 @@
 
             });
         }
+
+        $('#modal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('item') // Extract info from data-* attributes
+
+            console.log(recipient);
+
+            document.getElementById("form").reset();
+            document.getElementById('id').value = ''
+            $('.error').empty();
+
+            if (recipient) {
+                var modal = $(this);
+                modal.find('#id').val(recipient.id);
+                modal.find('#name').val(recipient.name);
+                modal.find('#email').val(recipient.email);
+                modal.find('#no_telp').val(recipient.no_telp);
+                modal.find('#role').val(recipient.role);
+            }
+        })
     </script>
 @endpush

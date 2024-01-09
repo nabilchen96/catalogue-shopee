@@ -1,0 +1,17 @@
+{
+    "name": "EIAD Kaur",
+    "short_name": "IAD",
+    "start_url": "/",
+    "background_color": "#6777ef",
+    "description": "Aplikasi Kegiatan IAD Kaur",
+    "display": "fullscreen",
+    "theme_color": "#6777ef",
+    "icons": [
+        {
+            "src": "iad.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

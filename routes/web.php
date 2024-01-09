@@ -18,7 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', 'App\Http\Controllers\AuthController@login')->name('login');
 Route::post('/loginProses', 'App\Http\Controllers\AuthController@loginProses');
 
-Route::get('/', function(){
+//ABSENSI
+Route::get('/front-absensi', 'App\Http\Controllers\AbsensiController@frontAbsensi');
+Route::post('/absensi-store', 'App\Http\Controllers\AbsensiController@store');
+
+Route::get('/', function () {
     return view('frontend.landing');
 });
 
@@ -35,95 +39,80 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/update-user', 'App\Http\Controllers\UserController@update');
     Route::post('/delete-user', 'App\Http\Controllers\UserController@delete');
 
-    //MATRIK
-    Route::get('/matrik', 'App\Http\Controllers\MatrikController@index');
-    Route::get('/data-matrik', 'App\Http\Controllers\MatrikController@data');
-    Route::post('/store-matrik', 'App\Http\Controllers\MatrikController@store');
-    
-    //PERIODE
-    Route::get('/jadwal', 'App\Http\Controllers\JadwalController@index');
-    Route::get('/data-jadwal', 'App\Http\Controllers\JadwalController@data');
-    Route::post('/store-jadwal', 'App\Http\Controllers\JadwalController@store');
-    Route::post('/update-jadwal', 'App\Http\Controllers\JadwalController@update');
-    Route::post('/delete-jadwal', 'App\Http\Controllers\JadwalController@delete');
+    //AGENDA
+    Route::get('/agenda', 'App\Http\Controllers\AgendaController@index');
+    Route::get('/data-agenda', 'App\Http\Controllers\AgendaController@data');
+    Route::post('/store-agenda', 'App\Http\Controllers\AgendaController@store');
+    Route::post('/update-agenda', 'App\Http\Controllers\AgendaController@update');
+    Route::post('/delete-agenda', 'App\Http\Controllers\AgendaController@delete');
 
-    //UNIT
-    Route::get('/unit', 'App\Http\Controllers\UnitController@index');
-    Route::get('/data-unit', 'App\Http\Controllers\UnitController@data');
-    Route::post('/store-unit', 'App\Http\Controllers\UnitController@store');
-    Route::post('/update-unit', 'App\Http\Controllers\UnitController@update');
-    Route::post('/delete-unit', 'App\Http\Controllers\UnitController@delete');
 
-    //RISIKO
-    Route::get('/risiko', 'App\Http\Controllers\RisikoController@index');
-    Route::get('/data-risiko', 'App\Http\Controllers\RisikoController@data');
-    Route::post('/store-risiko', 'App\Http\Controllers\RisikoController@store');
-    Route::post('/update-risiko', 'App\Http\Controllers\RisikoController@update');
-    Route::post('/delete-risiko', 'App\Http\Controllers\RisikoController@delete');
+    //ANGGOTA
+    Route::get('/anggota', 'App\Http\Controllers\AnggotaController@index');
+    Route::get('/data-anggota', 'App\Http\Controllers\AnggotaController@data');
+    Route::post('/store-anggota', 'App\Http\Controllers\AnggotaController@store');
+    Route::post('/update-anggota', 'App\Http\Controllers\AnggotaController@update');
+    Route::post('/delete-anggota', 'App\Http\Controllers\AnggotaController@delete');
 
-    //PROFIL RISIKO
-    Route::get('/profil-risk', 'App\Http\Controllers\ProfilRisikoController@index');
-    Route::get('/data-profil-risk', 'App\Http\Controllers\ProfilRisikoController@data');
-    Route::post('/store-profil-risk', 'App\Http\Controllers\ProfilRisikoController@store');
-    Route::post('/update-profil-risk', 'App\Http\Controllers\ProfilRisikoController@update');
-    Route::post('/delete-profil-risk', 'App\Http\Controllers\ProfilRisikoController@delete');
+    //SURAT MASUK
+    Route::get('/surat-masuk', 'App\Http\Controllers\SuratMasukController@index');
+    Route::get('/data-surat-masuk', 'App\Http\Controllers\SuratMasukController@data');
+    Route::post('/store-surat-masuk', 'App\Http\Controllers\SuratMasukController@store');
+    Route::post('/update-surat-masuk', 'App\Http\Controllers\SuratMasukController@update');
+    Route::post('/delete-surat-masuk', 'App\Http\Controllers\SuratMasukController@delete');
 
-    //NILAI EFEKTIVITAS
-    Route::get('/nilai-efektivitas', 'App\Http\Controllers\NilaiEfektivitasController@index');
-    Route::get('/data-nilai-efektivitas', 'App\Http\Controllers\NilaiEfektivitasController@data');
-    Route::post('/store-nilai-efektivitas', 'App\Http\Controllers\NilaiEfektivitasController@store');
-    Route::post('/update-nilai-efektivitas', 'App\Http\Controllers\NilaiEfektivitasController@update');
-    Route::post('/delete-nilai-efektivitas', 'App\Http\Controllers\NilaiEfektivitasController@delete');
+    //SURAT KELUAR
+    Route::get('/surat-keluar', 'App\Http\Controllers\SuratKeluarController@index');
+    Route::get('/data-surat-keluar', 'App\Http\Controllers\SuratKeluarController@data');
+    Route::post('/store-surat-keluar', 'App\Http\Controllers\SuratKeluarController@store');
+    Route::post('/update-surat-keluar', 'App\Http\Controllers\SuratKeluarController@update');
+    Route::post('/delete-surat-keluar', 'App\Http\Controllers\SuratKeluarController@delete');
 
-    //KEMUNGKINAN
-    Route::get('/kemungkinan', 'App\Http\Controllers\KemungkinanController@index');
-    Route::get('/data-kemungkinan', 'App\Http\Controllers\KemungkinanController@data');
-    Route::post('/store-kemungkinan', 'App\Http\Controllers\KemungkinanController@store');
-    Route::post('/update-kemungkinan', 'App\Http\Controllers\KemungkinanController@update');
-    Route::post('/delete-kemungkinan', 'App\Http\Controllers\KemungkinanController@delete');
+    //INVENTARIS
+    Route::get('/inventaris', 'App\Http\Controllers\InventarisController@index');
+    Route::get('/data-inventaris', 'App\Http\Controllers\InventarisController@data');
+    Route::post('/store-inventaris', 'App\Http\Controllers\InventarisController@store');
+    Route::post('/update-inventaris', 'App\Http\Controllers\InventarisController@update');
+    Route::post('/delete-inventaris', 'App\Http\Controllers\InventarisController@delete');
 
-    //DAMPAK
-    Route::get('/dampak', 'App\Http\Controllers\DampakController@index');
-    Route::get('/data-dampak', 'App\Http\Controllers\DampakController@data');
-    Route::post('/store-dampak', 'App\Http\Controllers\DampakController@store');
-    Route::post('/update-dampak', 'App\Http\Controllers\DampakController@update');
-    Route::post('/delete-dampak', 'App\Http\Controllers\DampakController@delete');
+    //BARANG
+    Route::get('/barang', 'App\Http\Controllers\BarangController@index');
+    Route::get('/data-barang', 'App\Http\Controllers\BarangController@data');
+    Route::post('/store-barang', 'App\Http\Controllers\BarangController@store');
+    Route::post('/update-barang', 'App\Http\Controllers\BarangController@update');
+    Route::post('/delete-barang', 'App\Http\Controllers\BarangController@delete');
 
-    //NILAI RISIKO
-    Route::get('/nilai-risk', 'App\Http\Controllers\NilaiRisikoController@index');
-    Route::get('/data-nilai-risk', 'App\Http\Controllers\NilaiRisikoController@data');
+    //PEMBELIAN
+    Route::get('/pembelian', 'App\Http\Controllers\PembelianController@index');
+    Route::get('/data-pembelian', 'App\Http\Controllers\PembelianController@data');
+    Route::post('/store-pembelian', 'App\Http\Controllers\PembelianController@store');
+    Route::post('/update-pembelian', 'App\Http\Controllers\PembelianController@update');
+    Route::post('/delete-pembelian', 'App\Http\Controllers\PembelianController@delete');
 
-    //RENCANA PENANGANAN
-    Route::get('/rencana-penanganan', 'App\Http\Controllers\RencanaPenangananController@index');
-    Route::get('/data-rencana-penanganan', 'App\Http\Controllers\RencanaPenangananController@data');
-    Route::post('/store-rencana-penanganan', 'App\Http\Controllers\RencanaPenangananController@store');
-    Route::post('/update-rencana-penanganan', 'App\Http\Controllers\RencanaPenangananController@update');
-    Route::post('/delete-rencana-penanganan', 'App\Http\Controllers\RencanaPenangananController@delete');
+    //Penjualan
+    Route::get('/penjualan', 'App\Http\Controllers\PenjualanController@index');
+    Route::get('/data-penjualan', 'App\Http\Controllers\PenjualanController@data');
+    Route::post('/store-penjualan', 'App\Http\Controllers\PenjualanController@store');
+    Route::post('/update-penjualan', 'App\Http\Controllers\PenjualanController@update');
+    Route::post('/delete-penjualan', 'App\Http\Controllers\PenjualanController@delete');
 
-    //BERKAS AUDIT
-    Route::get('/berkas-audit', 'App\Http\Controllers\BerkasAuditController@index');
-    Route::get('/data-berkas-audit', 'App\Http\Controllers\BerkasAuditController@data');
-    Route::post('/store-berkas-audit', 'App\Http\Controllers\BerkasAuditController@store');
-    Route::post('/update-berkas-audit', 'App\Http\Controllers\BerkasAuditController@update');
-    Route::post('/delete-berkas-audit', 'App\Http\Controllers\BerkasAuditController@delete');
-    Route::post('/response-berkas-audit', 'App\Http\Controllers\BerkasAuditController@response');
-    
-    //BERKAS REVIEW
-    Route::get('/berkas-review', 'App\Http\Controllers\BerkasReviewController@index');
-    Route::get('/data-berkas-review', 'App\Http\Controllers\BerkasReviewController@data');
-    Route::post('/response-berkas-review', 'App\Http\Controllers\BerkasReviewController@response');
-    
-    //BERKAS EVALUASI
-    Route::get('/berkas-evaluasi', 'App\Http\Controllers\BerkasEvaluasiController@index');
-    Route::get('/data-berkas-evaluasi', 'App\Http\Controllers\BerkasEvaluasiController@data');
+    //cicilan
+    Route::get('/cicilan', 'App\Http\Controllers\CicilanController@index');
+    Route::get('/data-cicilan', 'App\Http\Controllers\CicilanController@data');
+    Route::post('/store-cicilan', 'App\Http\Controllers\CicilanController@store');
+    Route::post('/update-cicilan', 'App\Http\Controllers\CicilanController@update');
+    Route::post('/delete-cicilan', 'App\Http\Controllers\CicilanController@delete');
 
-    //DOKUMEN SPI
-    Route::get('/dokumen-spi', 'App\Http\Controllers\DokumenSpiController@index');
-    Route::get('/data-dokumen-spi', 'App\Http\Controllers\DokumenSpiController@data');
-    Route::post('/store-dokumen-spi', 'App\Http\Controllers\DokumenSpiController@store');
-    Route::post('/update-dokumen-spi', 'App\Http\Controllers\DokumenSpiController@update');
-    Route::post('/delete-dokumen-spi', 'App\Http\Controllers\DokumenSpiController@delete');
-    
+    //stok
+    Route::get('/stok', 'App\Http\Controllers\StokController@index');
+    Route::get('/data-stok', 'App\Http\Controllers\StokController@data');
+    Route::get('/export-pdf-stok', 'App\Http\Controllers\StokController@exportPdf');
+
+    //ABSENSI
+    Route::get('/absensi', 'App\Http\Controllers\AbsensiController@index');
+    Route::get('/data-absensi', 'App\Http\Controllers\AbsensiController@data');
+    Route::post('/delete-absensi', 'App\Http\Controllers\AbsensiController@delete');
+    Route::get('/export-pdf-absensi', 'App\Http\Controllers\AbsensiController@exportPdf');
 });
 
 //LOGOUT

@@ -49,21 +49,6 @@
             white-space: unset;
         }
 
-        ::-webkit-scrollbar {
-            width: 15px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background-color: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: #d6dee1;
-            border-radius: 20px;
-            border: 6px solid transparent;
-            background-clip: content-box;
-        }
-
         table td {
             line-height: 1.5 !important;
         }
@@ -122,10 +107,14 @@
                 style="box-shadow: 0px 5px 21px -5px #CDD1E1;">
                 <a class="navbar-brand brand-logo mr-5" style="font-size: 16px; margin-left: 20px;"
                     href="{{ url('/') }}">
-                    <h3><b>E-SPI</b></h3>
+                    <h3>
+                        <img src="{{ asset('iad.png') }}" alt="">
+                    </h3>
                 </a>
                 <a class="navbar-brand brand-logo-mini" href="{{ url('/') }}">
-                    <h4><b>SPI</b></h4>
+                    <img src="{{ asset('iad.png') }}" style="width: 35px !important; height: 35px !important;" alt="">
+                    {{-- <h4>
+                    </h4> --}}
                 </a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -138,7 +127,7 @@
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                             {{-- <img src="{{ asset('mountain.png') }}" style="object-fit: cover;" alt="profile" /> --}}
-                            <i class="bi bi-person-circle" style="font-size: 30px;"></i>
+                            <i class="bi bi-person-circle" style="font-size: 30px !important;"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                             aria-labelledby="profileDropdown">
@@ -159,9 +148,7 @@
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_settings-panel.html -->
-            <div class="theme-setting-wrapper">
-                <div id="settings-trigger"><i class="ti-settings"></i></div>
-            </div>
+            
 
             <!-- partial -->
             <!-- partial:partials/_sidebar.html -->

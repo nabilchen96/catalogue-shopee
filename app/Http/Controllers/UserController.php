@@ -11,90 +11,99 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function index(){
-        return view('backend.users.index');
-    }
+    public function index()
+    {
 
-    public function data(){
-        
+        $q = Request('q');
         $user = DB::table('users');
 
-        $data_user = Auth::user();
-        $user = $user->get();
+        if ($q) {
+            $user = $user->where('name', 'like', '%' . $q . '%')
+                    ->orWhere('email', 'like', '%' . $q . '%')
+                    ->orWhere('no_telp', 'like', '%' . $q . '%')
+                    ->orderBy('id', 'DESC')
+                    ->get();
+        } else {
+            $user = $user->orderBy('id', 'DESC')->get();
+        }
 
-        
-        return response()->json(['data' => $user]);
+        return view('backend.users.index', [
+            'user' => $user
+        ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
 
         $validator = Validator::make($request->all(), [
-            'password'   => 'required',
-            'email'      => 'unique:users'
+            'password' => 'required',
+            'email' => 'unique:users'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             $data = [
-                'responCode'    => 0,
-                'respon'        => $validator->errors()
+                'responCode' => 0,
+                'respon' => $validator->errors()
             ];
-        }else{
+        } else {
             $data = User::create([
-                'name'          => $request->name,
-                'role'          => $request->role,
-                'email'         => $request->email,
-                'nip'           => $request->nip,
-                'password'      => Hash::make($request->password)
+                'name' => $request->name,
+                'role' => $request->role,
+                'email' => $request->email,
+                'no_telp' => $request->no_telp,
+                'password' => Hash::make($request->password)
             ]);
 
             $data = [
-                'responCode'    => 1,
-                'respon'        => 'Data Sukses Ditambah'
+                'responCode' => 1,
+                'respon' => 'Data Sukses Ditambah'
             ];
         }
 
         return response()->json($data);
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
 
         $validator = Validator::make($request->all(), [
-            'id'    => 'required'
+            'id' => 'required'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             $data = [
-                'responCode'    => 0,
-                'respon'        => $validator->errors()
+                'responCode' => 0,
+                'respon' => $validator->errors()
             ];
-        }else{
+        } else {
 
             $user = User::find($request->id);
             $data = $user->update([
-                'name'      => $request->name,
-                'role'      => $request->role,
-                'email'     => $request->email,
-                'nip'       => $request->nip,
-                'password'  => $request->password ? Hash::make($request->password) : $user->password
+                'name' => $request->name,
+                'role' => $request->role,
+                'email' => $request->email,
+                'no_telp' => $request->no_telp,
+                'password' => $request->password ? Hash::make($request->password) : $user->password
             ]);
 
             $data = [
-                'responCode'    => 1,
-                'respon'        => 'Data Sukses Disimpan'
+                'responCode' => 1,
+                'respon' => 'Data Sukses Disimpan'
             ];
         }
 
         return response()->json($data);
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
 
         $data = User::find($request->id)->delete();
 
         $data = [
-            'responCode'    => 1,
-            'respon'        => 'Data Sukses Dihapus'
+            'responCode' => 1,
+            'respon' => 'Data Sukses Dihapus'
         ];
 
         return response()->json($data);
