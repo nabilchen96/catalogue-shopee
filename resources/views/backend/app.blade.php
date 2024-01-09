@@ -247,7 +247,28 @@
         function showLoadingIndicator() {
             document.getElementById('loadingIndicator').style.display = 'flex';
         }
-        
+
+        // Function to hide the loading indicator
+        function hideLoadingIndicator() {
+            document.getElementById('loadingIndicator').style.display = 'none';
+        }
+
+        // Event listener for popstate
+        window.addEventListener('popstate', function(event) {
+            // Show the loading indicator when navigating back
+            showLoadingIndicator();
+
+            // You may want to add additional logic here if needed
+        });
+
+        // Event listener for pageshow
+        window.addEventListener('pageshow', function(event) {
+            // Check if the page is being shown from the bfcache (back-forward cache)
+            if (event.persisted) {
+                // If it's a back-forward navigation, hide the loading indicator
+                hideLoadingIndicator();
+            }
+        });
     </script>
 </body>
 

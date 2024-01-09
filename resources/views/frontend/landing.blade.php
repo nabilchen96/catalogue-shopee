@@ -155,7 +155,7 @@
     </header>
 
     <div class="banner">
-        <div class="container" id="kegiatan">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-12 mt-4">
                     <h2>Aplikasi Kegiatan & Laporan</h2>
@@ -170,7 +170,7 @@
             <br><br>
         </div>
     </div>
-    <div id="jadwal"></div>
+    <div id="kegiatan"></div>
     <div class="content-wrapper">
         <div class="px-3">
             <section class="features-overview" id="features-section">

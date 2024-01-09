@@ -31,7 +31,7 @@ class AnggotaController extends Controller
                 ->orderBy('id', 'DESC')
                 ->paginate(10);
         } else {
-            $anggota = $anggota->orderBy('id', 'DESC')->paginate(10)->get();
+            $anggota = $anggota->orderBy('id', 'DESC')->paginate(10);
         }
 
         return view('backend.anggota.index', [
