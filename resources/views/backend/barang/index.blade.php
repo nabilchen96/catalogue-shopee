@@ -59,7 +59,7 @@
                 <div class="input-group mb-4 mt-3">
                     <input type="text" value="{{ Request('q') }}" style="border: none;" class="form-control" name="q"
                         placeholder="Type to Search or Clear to See All Data ...">
-                    <button type="submit" style="border: none; height: 38px;" class="input-group-text bg-primary text-white"
+                    <button onclick="showLoadingIndicator()" type="submit" style="border: none; height: 38px;" class="input-group-text bg-primary text-white"
                         id="basic-addon2">
                         <i class="bi bi-search"></i>
                     </button>

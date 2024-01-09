@@ -47,7 +47,7 @@
                         name="tgl_awal" required placeholder="Tanggal Awal">
                     <input type="date" value="{{ Request('tgl_akhir') ?? date('Y-m-d') }}" style="border: none;" class="border-left form-control"
                         name="tgl_akhir" required placeholder="Tanggal Akhir" aria-placeholder="Tanggal Akhir">
-                    <button type="submit" style="border: none; height: 38px;"
+                    <button onclick="showLoadingIndicator()" type="submit" style="border: none; height: 38px;"
                         class="input-group-text bg-primary text-white" id="basic-addon2">
                         <i class="bi bi-search"></i>
                     </button>

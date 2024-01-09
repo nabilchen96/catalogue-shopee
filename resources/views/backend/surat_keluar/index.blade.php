@@ -52,7 +52,7 @@
                     <input type="date" value="{{ Request('tgl') }}" style="border: none;"
                         class="border-left form-control" name="tgl"
                         placeholder="Type to Search or Clear to See All Data ...">
-                    <button type="submit" style="border: none; height: 38px;"
+                    <button onclick="showLoadingIndicator()" type="submit" style="border: none; height: 38px;"
                         class="input-group-text bg-primary text-white" id="basic-addon2">
                         <i class="bi bi-search"></i>
                     </button>

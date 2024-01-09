@@ -29,16 +29,11 @@
                     <tr>
                         <td style="border: 1px solid black;">{{ $k+1 }}</td>
                         <td style="border: 1px solid black;">
-                            <img width="200px">
-                            <div style="
-                                width: 50px;
-                                height: 50px; 
-                                background-image: url('{{asset('foto_barang') }}/{{ $item->foto_barang}}')
-                                background-size: cover;
-                                background-position: center;
-                            ">
-
-                            </div>
+                            @if ($item->foto_barang)
+                                <img src="{{ asset('foto_barang') }}/{{ $item->foto_barang }}" width="50px" height="50px">
+                            @else
+                                <img src="{{ asset('no_image.jpg') }}" width="50px" height="50px">
+                            @endif
                         </td>
                         <td style="border: 1px solid black;">{{ $item->nama_barang }}</td>
                         <td style="border: 1px solid black;">{{ $item->stok }}</td>

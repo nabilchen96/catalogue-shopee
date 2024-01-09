@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Sistem Informasi SPI</title>
+    <title>Aplikasi Kegiatan IAD Kaur</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('skydash/vendors/feather/feather.css') }}">
     <link rel="stylesheet" href="{{ asset('skydash/vendors/ti-icons/css/themify-icons.css') }}">
@@ -56,6 +56,22 @@
         .navbar {
             box-shadow: none !important;
         }
+
+        /* style.css */
+
+        .loading-indicator {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            z-index: 1000;
+        }
     </style>
 
     <script language="javascript">
@@ -100,6 +116,9 @@
 </head>
 
 <body>
+    <div class="loading-indicator" id="loadingIndicator">
+        Loading...
+    </div>
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -112,7 +131,8 @@
                     </h3>
                 </a>
                 <a class="navbar-brand brand-logo-mini" href="{{ url('/') }}">
-                    <img src="{{ asset('iad.png') }}" style="width: 35px !important; height: 35px !important;" alt="">
+                    <img src="{{ asset('iad.png') }}" style="width: 35px !important; height: 35px !important;"
+                        alt="">
                     {{-- <h4>
                     </h4> --}}
                 </a>
@@ -148,7 +168,7 @@
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_settings-panel.html -->
-            
+
 
             <!-- partial -->
             <!-- partial:partials/_sidebar.html -->
@@ -220,10 +240,19 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.7/dist/sweetalert2.all.min.js"></script>
     <!-- script tambahan  -->
 
-        <!-- End custom js for this page
+    <!-- End custom js for this page
         -->
-        @stack('script')
+    @stack('script')
 
+    <script>
+        // script.js
+
+        // Function to show the loading indicator
+        function showLoadingIndicator() {
+            document.getElementById('loadingIndicator').style.display = 'flex';
+        }
+        
+    </script>
 </body>
 
 </html>

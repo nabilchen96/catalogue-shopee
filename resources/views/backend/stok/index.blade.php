@@ -33,7 +33,7 @@
     </style>
 @endpush
 @section('content')
-    <a href="{{ url('export-pdf-stok') }}" class="bg-danger act-btn"><i style="font-size: 20px;" class="bi bi-file-earmark-pdf"></i></a>
+    <a onclick="showLoadingIndicator()" href="{{ url('export-pdf-stok') }}" class="bg-danger act-btn"><i style="font-size: 20px;" class="bi bi-file-earmark-pdf"></i></a>
     <div class="row" style="margin-top: -200px;">
         <div class="col-md-12 px-1">
             <div class="row">
@@ -49,7 +49,7 @@
                 <div class="input-group mb-3 mt-3">
                     <input type="text" value="{{ Request('q') }}" style="border: none;" class="form-control"
                         name="q" placeholder="Type to Search or Clear to See All Data ...">
-                    <button type="submit" style="border: none; height: 38px;"
+                    <button onclick="showLoadingIndicator()" type="submit" style="border: none; height: 38px;"
                         class="input-group-text bg-primary text-white" id="basic-addon2">
                         <i class="bi bi-search"></i>
                     </button>
@@ -83,9 +83,11 @@
                                             height: 50px;
                                             background-size: cover;
                                             background-position: center;
-                                            @if ($item->foto_barang) background-image: url('{{ asset('foto_barang') }}/{{ $item->foto_barang }}');
+                                            @if ($item->foto_barang) 
+                                                background-image: url('{{ asset('foto_barang') }}/{{ $item->foto_barang }}');
                                             @else 
-                                                background-image: url('{{ asset('no_image.jpg') }}'); @endif    
+                                                background-image: url('{{ asset('no_image.jpg') }}'); 
+                                            @endif    
                                             ">
                                             </div>
                                         </td>
