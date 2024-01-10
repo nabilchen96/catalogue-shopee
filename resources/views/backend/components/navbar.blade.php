@@ -97,5 +97,11 @@
                 <span class="menu-title">Absensi</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a onclick="showLoadingIndicator()" class="nav-link" href="{{ url('jurnal-umum') }}">
+                <i class="bi bi-wallet2 menu-icon"></i>
+                <span class="menu-title">Jurnal Umum</span>
+            </a>
+        </li>
     </ul>
 </nav>

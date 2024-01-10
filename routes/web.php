@@ -113,6 +113,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/data-absensi', 'App\Http\Controllers\AbsensiController@data');
     Route::post('/delete-absensi', 'App\Http\Controllers\AbsensiController@delete');
     Route::get('/export-pdf-absensi', 'App\Http\Controllers\AbsensiController@exportPdf');
+
+    //JURNAL UMUM
+    Route::get('/jurnal-umum', 'App\Http\Controllers\JurnalUmumController@index');
+    Route::get('/data-jurnal-umum', 'App\Http\Controllers\JurnalUmumController@data');
+    Route::post('/store-jurnal-umum', 'App\Http\Controllers\JurnalUmumController@store');
+    Route::post('/update-jurnal-umum', 'App\Http\Controllers\JurnalUmumController@update');
+    Route::post('/delete-jurnal-umum', 'App\Http\Controllers\JurnalUmumController@delete');
 });
 
 //LOGOUT
