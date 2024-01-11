@@ -17,22 +17,18 @@ class JurnalUmumController extends Controller
 
         $tgl_awal = Request('tgl_awal');
         $tgl_akhir = Request('tgl_akhir');
+        $bidang = Request('bidang');
 
         $jurnal = DB::table('jurnal_umums as p');
 
-        if ($tgl_awal && $tgl_akhir) {
-            $jurnal = $jurnal
-                ->whereBetween(DB::raw('DATE(p.waktu_transaksi)'), [
-                    $tgl_awal,
-                    $tgl_akhir
-                ])
-                ->orderBy('p.id', 'DESC')
-                ->paginate(10);
-
-        } else {
-
-            $jurnal = $jurnal->orderBy('p.id', 'DESC')->paginate(10);
-        }
+        $jurnal = $jurnal
+            ->whereBetween(DB::raw('DATE(p.waktu_transaksi)'), [
+                $tgl_awal,
+                $tgl_akhir
+            ])
+            ->where('bidang', $bidang ?? 'Ekonomi')
+            ->orderBy('p.id', 'DESC')
+            ->paginate(10);
 
         return view('backend.jurnal_umum.index', [
             'jurnal' => $jurnal
@@ -57,6 +53,7 @@ class JurnalUmumController extends Controller
                 'kredit' => $request->kredit,
                 'waktu_transaksi' => $request->tanggal_transaksi,
                 'keterangan' => $request->keterangan,
+                'bidang' => $request->bidang,
                 'id_user' => Auth::id()
             ]);
 
@@ -81,5 +78,34 @@ class JurnalUmumController extends Controller
         ];
 
         return response()->json($data);
+    }
+
+    public function exportPdf(){
+
+        ini_set('max_execution_time', 300);
+
+        $tgl_awal = Request('tgl_awal');
+        $tgl_akhir = Request('tgl_akhir');
+        $bidang = Request('bidang');
+
+        $jurnal = DB::table('jurnal_umums as p');
+
+        $jurnal = $jurnal
+            ->whereBetween(DB::raw('DATE(p.waktu_transaksi)'), [
+                $tgl_awal,
+                $tgl_akhir
+            ])
+            ->where('bidang', $bidang ?? 'Ekonomi')
+            ->orderBy('p.id', 'DESC')
+            ->paginate(10);
+
+        $data = PDF::loadview('backend.jurnal_umum.export_pdf', [
+            'jurnal' => $jurnal, 
+            'bidang' => $bidang, 
+            'tgl_awal' => $tgl_awal, 
+            'tgl_akhir' => $tgl_akhir
+        ]);
+
+    	return $data->download('laporan.pdf');
     }
 }

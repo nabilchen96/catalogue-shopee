@@ -100,7 +100,19 @@
         <li class="nav-item">
             <a onclick="showLoadingIndicator()" class="nav-link" href="{{ url('jurnal-umum') }}">
                 <i class="bi bi-wallet2 menu-icon"></i>
-                <span class="menu-title">Jurnal Umum</span>
+                <span class="menu-title">Lap. Keuangan</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a onclick="showLoadingIndicator()" class="nav-link" href="{{ url('notulen-rapat') }}">
+                <i class="bi bi-justify-right menu-icon"></i>
+                <span class="menu-title">Notulen Rapat</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a onclick="showLoadingIndicator()" class="nav-link" href="{{ url('foto-kegiatan') }}">
+                <i class="bi bi-camera menu-icon"></i>
+                <span class="menu-title">Foto Kegiatan</span>
             </a>
         </li>
     </ul>

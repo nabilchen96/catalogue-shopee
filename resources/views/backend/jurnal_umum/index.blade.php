@@ -30,103 +30,123 @@
         td {
             white-space: nowrap !important;
         }
+
+        .button-container {
+            overflow-x: auto;
+            white-space: nowrap;
+            display: flex;
+        }
+
+        .btn {
+            flex: 0 0 auto;
+            margin-right: 8px;
+        }
     </style>
 @endpush
 @section('content')
-    <a data-toggle="modal" data-target="#modal" style="bottom: 90px !important;" href="{{ url('store-jurnal-umum') }}"
+    <a data-toggle="modal" data-target="#modal" style="bottom: 90px !important;" href="#"
         class="bg-primary act-btn">
         +
     </a>
 
-    <a href="{{ url('export-pdf-jurnal-umum') }}" class="bg-danger act-btn"><i style="font-size: 20px;"
+    <a href="{{ url('export-pdf-jurnal-umum') }}?tgl_awal={{ Request('tgl_awal') }}&tgl_akhir={{ Request('tgl_akhir') }}&bidang={{ Request('bidang') }}" class="bg-danger act-btn"><i style="font-size: 20px;"
             class="bi bi-file-earmark-pdf"></i></a>
     <div class="row" style="margin-top: -200px;">
         <div class="col-md-12 px-1">
             <div class="row">
                 <div class="col-12 col-xl-8 mb-xl-0">
-                    <h3 class="font-weight-bold">Data Jurnal Umum</h3>
+                    <h3 class="font-weight-bold">Data Keuangan {{ Request('bidang') }}</h3>
                 </div>
             </div>
         </div>
     </div>
-    <form>
-        <div class="row">
-            <div class="col-12 px-1">
-                <div class="input-group shadow mb-3 mt-3">
-                    <input type="date" value="{{ Request('tgl_awal') ?? date('Y-m-d') }}" style="border: none;"
-                        class="form-control" name="tgl_awal" required placeholder="Tanggal Awal">
-                    <input type="date" value="{{ Request('tgl_akhir') ?? date('Y-m-d') }}" style="border: none;"
-                        class="border-left form-control" name="tgl_akhir" required placeholder="Tanggal Akhir"
-                        aria-placeholder="Tanggal Akhir">
-                    <button onclick="showLoadingIndicator()" type="submit" style="border: none; height: 38px;"
-                        class="input-group-text bg-primary text-white" id="basic-addon2">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </form>
     <div class="row">
         <div class="col-12 px-1">
-            <div class="mb-3">
-                <div class="">
-                    <div class="table-responsive">
-                        <table class="table bg-white table-striped" style="width: 100%;">
-                            <thead class="bg-primary text-white">
-                                <tr>
-                                    <th width="5%">No</th>
-                                    <th>Tanggal</th>
-                                    <th>Keterangan</th>
-                                    <th>Debit</th>
-                                    <th>Kredit</th>
-                                    <th width="5%"></th>
-                                    <th width="5%"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $debit = 0; $kredit = 0; ?>
-                                @foreach ($jurnal as $k => $item)
-                                    <tr>
-                                        <td>{{ $k + 1 }}</td>
-                                        <td>{{ $item->waktu_transaksi }}</td>
-                                        <td>
-                                            <p
-                                                style="max-width: 300px; white-space: normal !important; word-wrap: break-word;">
-                                                {{ $item->keterangan }}
-                                            </p>
-                                        </td>
-                                        <td>Rp. {{ number_format($item->debet) }}</td>
-                                        <td>Rp. {{ number_format($item->kredit) }}</td>
-                                        <td></td>
-                                        <td>
-                                            <a href="#" onclick="hapusData({{ $item->id }})">
-                                                <i style="font-size: 1.5rem;" class="bi bi-trash text-danger"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                        $debit += $item->debet;
-                                        $kredit += $item->kredit;
-                                    ?>
-                                @endforeach
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        Rp. {{ number_format($debit) }}
-                                    </td>
-                                    <td>
-                                        Rp. {{ number_format($kredit) }}
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                {{ $jurnal->links() }}
-                            </tbody>
-                        </table>
+            <button data-toggle="modal" data-target="#filter" class="mb-2 mt-2 btn btn-sm btn-primary">
+                <i class="bi bi-search"></i>
+            </button>
+            <div class="modal fade" id="filter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form id="formX">
+                            <div class="modal-header p-3">
+                                <h5 class="modal-title m-2" id="exampleModalLabel">Filter Form</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Tanggal Mulai <sup class="text-danger">*</sup></label>
+                                    <input name="tgl_awal" value="{{ Request('tgl_awal') ?? date('Y-m-d') }}" id="tgl_awal" type="date" class="form-control form-control-sm">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tanggal Mulai <sup class="text-danger">*</sup></label>
+                                    <input name="tgl_akhir" value="{{ Request('tgl_akhir') ?? date('Y-m-d') }}" id="tgl_akhir" type="date" class="form-control form-control-sm">
+                                </div>
+                                <div class="form-group">
+                                    <label>Bidang <sup class="text-danger">*</sup></label>
+                                    <select name="bidang" class="form-control" id="bidang" required>
+                                        <option value="">--PILIH BIDANG--</option>
+                                        <option {{ Request('bidang') == 'Ekonomi' ? 'selected' : '' }}>Ekonomi</option>
+                                        <option {{ Request('bidang') == 'Umum' ? 'selected' : '' }}>Umum</option>
+                                        <option {{ Request('bidang') == 'Sekretariat' ? 'selected' : '' }}>Sekretariat</option>
+                                        <option {{ Request('bidang') == 'Sosial' ? 'selected' : '' }}>Sosial</option>
+                                        <option {{ Request('bidang') == 'Pendidikan' ? 'selected' : '' }}>Pendidikan</option>
+                                        <option {{ Request('bidang') == 'Budaya' ? 'selected' : '' }}>Budaya</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer p-3 d-flex align-items-end d-flex align-items-end">
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-danger btn-sm mr-1" data-dismiss="modal">Close</button>
+                                    <button id="tombol_kirim" class="btn btn-primary btn-sm">Submit</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table bg-white table-striped" style="width: 100%;">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th width="5%">No</th>
+                            <th>Tanggal</th>
+                            <th>Keterangan</th>
+                            <th>Bidang</th>
+                            <th>Penerimaan</th>
+                            <th>Pengeluaran</th>
+                            <th width="5%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($jurnal as $k => $item)
+                            <tr>
+                                <td>{{ $k + 1 }}</td>
+                                <td>{{ date('d-m-Y H:i', strtotime($item->waktu_transaksi)) }}</td>
+                                <td>
+                                    <div
+                                        style="max-width: 300px; white-space: normal !important; word-wrap: break-word;">
+                                        {{ $item->keterangan }}
+                                    </div>
+                                </td>
+                                <td>{{ $item->bidang }}</td>
+                                <td>Rp. {{ number_format($item->debet) }}</td>
+                                <td>Rp. {{ number_format($item->kredit) }}</td>
+                                <td>
+                                    <a href="#" onclick="hapusData({{ $item->id }})">
+                                        <i style="font-size: 1.5rem;" class="bi bi-trash text-danger"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    Klik tombol <i data-toggle="modal" data-target="#filter" class="bi bi-search"></i> untuk melakukan pencarian untuk menampilkan data
+                                </td>
+                            </tr>
+                        @endforelse
+                        {{ $jurnal->links() }}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -151,14 +171,25 @@
                                 class="form-control form-control-sm">
                         </div>
                         <div class="form-group">
-                            <label>Debit</label>
+                            <label>Penerimaan</label>
                             <input name="debet" id="debet" type="number" placeholder="Debit"
                                 class="form-control form-control-sm">
                         </div>
                         <div class="form-group">
-                            <label>Kredit</label>
+                            <label>Pengeluaran</label>
                             <input name="kredit" id="kredit" type="number" placeholder="Kredit"
                                 class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group">
+                            <label>Bidang <sup class="text-danger">*</sup></label>
+                            <select name="bidang" class="form-control" id="bidang" required>
+                                <option>Ekonomi</option>
+                                <option>Umum</option>
+                                <option>Sekretariat</option>
+                                <option>Sosial</option>
+                                <option>Pendidikan</option>
+                                <option>Budaya</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer p-3 d-flex align-items-end d-flex align-items-end">

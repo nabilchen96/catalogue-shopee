@@ -43,10 +43,10 @@
         <div class="row">
             <div class="col-12 px-1">
                 <div class="input-group mb-3 mt-3">
-                    <input type="text" value="{{ Request('q') }}" style="border: none;" class="form-control" name="q"
-                        placeholder="Type to Search or Clear to See All Data ...">
-                    <button onclick="showLoadingIndicator()" type="submit" style="border: none; height: 38px;" class="input-group-text bg-primary text-white"
-                        id="basic-addon2">
+                    <input type="text" value="{{ Request('q') }}" style="border: none;" class="form-control"
+                        name="q" placeholder="Type to Search or Clear to See All Data ...">
+                    <button onclick="showLoadingIndicator()" type="submit" style="border: none; height: 38px;"
+                        class="input-group-text bg-primary text-white" id="basic-addon2">
                         <i class="bi bi-search"></i>
                     </button>
                 </div>
@@ -71,8 +71,9 @@
                         </p>
                         <p><i class="bi bi-geo-alt"></i> {{ @$item->tempat }} </p>
                         <p><i class="bi bi-file-earmark-text"></i> {{ @$item->keterangan }}</p>
-                        <a data-toggle="modal" data-target="#modal" data-item="{{ json_encode(@$item) }}" href="javascript:void(0)"
-                            class="badge bg-info text-white" style="border-radius: 8px;">
+                        <p class="badge bg-info text-white">{{ @$item->bidang }}</p>
+                        <a data-toggle="modal" data-target="#modal" data-item="{{ json_encode(@$item) }}"
+                            href="javascript:void(0)" class="badge bg-info text-white" style="border-radius: 8px;">
                             <i class="bi bi-pencil-square"></i>
                         </a>
                         <a href="#" onclick="hapusData({{ @$item->id }})" class="badge bg-danger text-white"
@@ -96,28 +97,39 @@
                     <div class="modal-body">
                         <input type="hidden" name="id" id="id">
                         <div class="form-group">
-                            <label>Tanggal Mulai</label>
+                            <label>Tanggal Mulai <sup class="text-danger">*</sup></label>
                             <input name="tanggal_mulai" id="tanggal_mulai" type="date" placeholder="Tanggal"
                                 class="form-control form-control-sm" required>
                         </div>
                         <div class="form-group">
-                            <label>Tanggal Selesai</label>
+                            <label>Tanggal Selesai <sup class="text-danger">*</sup></label>
                             <input name="tanggal_selesai" id="tanggal_selesai" type="date"
                                 class="form-control form-control-sm" required>
                         </div>
                         <div class="form-group">
-                            <label>Tempat</label>
-                            <input name="tempat" id="tempat" placeholder="Tempat" type="string" class="form-control form-control-sm"
-                                required>
+                            <label>Tempat <sup class="text-danger">*</sup></label>
+                            <input name="tempat" id="tempat" placeholder="Tempat" type="string"
+                                class="form-control form-control-sm" required>
                         </div>
                         <div class="form-group">
-                            <label>Kegiatan</label>
-                            <input name="kegiatan" id="kegiatan" placeholder="Kegiatan" type="string" class="form-control form-control-sm"
-                                required>
+                            <label>Kegiatan <sup class="text-danger">*</sup></label>
+                            <input name="kegiatan" id="kegiatan" placeholder="Kegiatan" type="string"
+                                class="form-control form-control-sm" required>
                         </div>
                         <div class="form-group">
-                            <label>Keterangan</label>
-                           <textarea name="keterangan" placeholder="Keterangan" id="keterangan" cols="30" rows="5" class="form-control"></textarea>
+                            <label>Bidang <sup class="text-danger">*</sup></label>
+                            <select name="bidang" class="form-control" id="bidang" required>
+                                <option>Ekonomi</option>
+                                <option>Umum</option>
+                                <option>Sekretariat</option>
+                                <option>Sosial</option>
+                                <option>Pendidikan</option>
+                                <option>Budaya</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Keterangan <sup class="text-danger">*</sup></label>
+                            <textarea name="keterangan" placeholder="Keterangan" id="keterangan" cols="30" rows="5" class="form-control"></textarea>
                         </div>
 
                     </div>

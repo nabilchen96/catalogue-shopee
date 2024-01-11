@@ -120,6 +120,22 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/store-jurnal-umum', 'App\Http\Controllers\JurnalUmumController@store');
     Route::post('/update-jurnal-umum', 'App\Http\Controllers\JurnalUmumController@update');
     Route::post('/delete-jurnal-umum', 'App\Http\Controllers\JurnalUmumController@delete');
+    Route::get('/export-pdf-jurnal-umum', 'App\Http\Controllers\JurnalUmumController@exportPdf');
+
+    //NOTULEN RAPAT
+    Route::get('/notulen-rapat', 'App\Http\Controllers\NotulenRapatController@index');
+    Route::get('/data-notulen-rapat', 'App\Http\Controllers\NotulenRapatController@data');
+    Route::post('/store-notulen-rapat', 'App\Http\Controllers\NotulenRapatController@store');
+    Route::post('/update-notulen-rapat', 'App\Http\Controllers\NotulenRapatController@update');
+    Route::post('/delete-notulen-rapat', 'App\Http\Controllers\NotulenRapatController@delete');
+
+    //FOTO KEGIATAN
+    Route::get('/foto-kegiatan', 'App\Http\Controllers\FotoKegiatanController@index');
+    Route::get('/data-foto-kegiatan', 'App\Http\Controllers\FotoKegiatanController@data');
+    Route::post('/store-foto-kegiatan', 'App\Http\Controllers\FotoKegiatanController@store');
+    Route::post('/update-foto-kegiatan', 'App\Http\Controllers\FotoKegiatanController@update');
+    Route::post('/delete-foto-kegiatan', 'App\Http\Controllers\FotoKegiatanController@delete');
+
 });
 
 //LOGOUT

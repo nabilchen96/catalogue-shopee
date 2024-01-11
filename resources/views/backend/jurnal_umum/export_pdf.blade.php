@@ -10,21 +10,10 @@
         <table style="width: 100%;">
             <tr>
                 <td>
-                    <h1 style="text-align: center;">DAFTAR HADIR RAPAT</h1>
-                </td>
-            </tr>
-        </table>
-        <table style="width: 100%; border: 1px solid black;">
-            <tr>
-                <td style="border: 1px solid black; width: 100px;">
-                    Hari, Tanggal
-                </td>
-                <td style="border: 1px solid black; width: 5px;">
-                    :
-                </td>
-                <td style="border: 1px solid black;">
-                <?php use Carbon\Carbon; ?>
-                 {{ Carbon::parse(date('d-m-Y', strtotime($q)))->dayName }}, {{ date('d-m-Y', strtotime($q)) }}
+                    <h1 style="text-align: center;">LAPORAN KEUNGAN BAG. {{ strtoupper($bidang) }}</h1>
+                    <h1 style="text-align: center;">
+                       {{ date('d-m-Y', strtotime($tgl_awal)) }} s/d {{ date('d-m-Y', strtotime($tgl_akhir)) }}
+                    </h1>
                 </td>
             </tr>
         </table>
@@ -33,22 +22,22 @@
             <thead>
                 <tr>
                     <th style="border: 1px solid black; width: 5px;">No</th>
-                    <th style="border: 1px solid black; text-align: start;">Nama Anggota</th>
-                    <th style="border: 1px solid black; text-align: start;">Jabatan</th>
-                    <th style="border: 1px solid black; width: 200px;">Jenis Rapat</th>
-                    <th style="border: 1px solid black; width: 200px;">Tanda Tangan</th>
+                    <th style="border: 1px solid black; text-align: start;">Tanggal</th>
+                    <th style="border: 1px solid black; text-align: start;">Keterangan</th>
+                    <th style="border: 1px solid black; width: 200px;">Penerimaan</th>
+                    <th style="border: 1px solid black; width: 200px;">Pengeluaran</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($absensi as $k => $item)
+                @foreach ($jurnal as $k => $item)
                     <tr>
                         <td style="border: 1px solid black;">{{ $k+1 }}</td>
-                        <td style="border: 1px solid black;">{{ $item->nama_lengkap }}</td>
-                        <td style="border: 1px solid black;">{{ $item->jabatan }}</td>
-                        <td style="border: 1px solid black;">{{ $item->jenis_rapat }}</td>
                         <td style="border: 1px solid black;">
-                            <img width="200px" src="{{ asset('signature') }}/{{ @$item->signature }}" alt="">
+                            {{ date('d-m-Y H:i', strtotime($item->waktu_transaksi)) }}
                         </td>
+                        <td style="border: 1px solid black;">{{ $item->keterangan }}</td>
+                        <td style="border: 1px solid black;">Rp. {{ number_format($item->debet) }}</td>
+                        <td style="border: 1px solid black;">Rp. {{ number_format($item->kredit) }}</td>
                     </tr>
                 @endforeach
             </tbody>
