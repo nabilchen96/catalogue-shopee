@@ -20,29 +20,27 @@
     <title>Aplikasi Kegiatan IAD Kaur</title>
     <style>
         .form-control {
-            height: 40px !important;
+            height: 35px !important;
         }
     </style>
 </head>
 
 <body>
-
-
-    <div class="d-lg-flex half" style="min-height: 850px !important;">
+    <div class="d-lg-flex half" style="min-height: 750px !important;">
         <div class="bg order-1 order-md-2" style="background-image: url('natural.png');"></div>
         <div class="contents order-2 order-md-1">
 
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-7 mt-2">
-                        Form
-                        <h3>Absensi Rapat</h3>
+                        Formulir
+                        <h3>Absensi Piket</h3>
                         <p>Anggota IAD Kaur</p>
                         <br>
                         <form id="form">
                             <div class="form-group first">
                                 <label for="username">Nama Anggota</label>
-                                <select name="id_anggota" id="id_anggota" class="form-control" required>
+                                <select name="nama_pengurus" id="nama_pengurus" class="form-control" required>
                                     <option value="">--PILIH NAMA ANGGOTA--</option>
                                     <?php $anggota = DB::table('anggotas')->get(); ?>
                                     @foreach ($anggota as $item)
@@ -50,20 +48,12 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="form-group first">
                                 <label for="username">Password</label>
                                 <input type="password" name="password" id="password" class="form-control" required placeholder="Password">
                             </div>
-                            <div class="form-group last mb-3">
-                                <label for="password">Jenis Rapat</label>
-                                <select name="jenis_rapat" id="jenis_rapat" class="form-control" required>
-                                    <option value="">--PILIH JENIS RAPAT--</option>
-                                    <option>Rapat Anggota Inti</option>
-                                    <option>Rapat Seluruh Anggota</option>
-                                    <option>Rapat Konsultasi</option>
-                                </select>
-                            </div>
-
+                           
                             <div class="form-group last mb-3">
                                 <label>Tanda Tangan <sup class="text-danger">*</sup></label>
                                 <div id="signature-alert"></div>
@@ -102,7 +92,6 @@
                         <a onclick="showLoadingIndicator()" href="{{ url('/') }}" style="text-decoration: none;" type="submit" id="btnLogin" class="text-white btn btn-info btn-lg btn-block">
                             🏠 Kembali
                           </a>
-                          <br>
                     </div>
                 </div>
             </div>
@@ -188,7 +177,7 @@
 
                 axios({
                         method: 'post',
-                        url: '/absensi-store',
+                        url: '/piket-store',
                         data: formData,
                     })
                     .then(function(res) {

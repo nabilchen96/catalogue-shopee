@@ -24,10 +24,6 @@
         .act-btn:hover {
             background: white;
         }
-
-        i {
-            font-size: 14px !important;
-        }
     </style>
 @endpush
 @section('content')
@@ -38,7 +34,7 @@
         <div class="col-md-12 px-1">
             <div class="row">
                 <div class="col-12 col-xl-8 mb-xl-0">
-                    <h3 class="font-weight-bold">Data Cicilan</h3>
+                    <h3 class="font-weight-bold">Data Harian IAD</h3>
                 </div>
             </div>
         </div>
@@ -57,103 +53,108 @@
             </div>
         </div>
     </form>
+    <div class="accordion" id="accordionExample">
+        <div class="row">
+            <div class="col-12 px-1">
+                @foreach ($harian as $k => $item)
+                    <div class="col-lg-12 mb-3 px-1">
+                        <div class="card shadow">
+                            <div class="card-body" style="padding: 1.25rem;">
+                                <div class=""
+                                    style="border-bottom-left-radius: 0 !important; border-bottom-right-radius: 0 !important;"
+                                    id="headingOne">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <p>
+                                                <i class="bi bi-bricks"></i>
+                                                <span class="text-danger">
+                                                    {{ @$item->masalah }}
+                                                </span>
+                                            </p>
+                                            <p><i class="bi bi-calendar3"></i>
+                                                {{ date('d/m/Y', strtotime(@$item->tanggal_harian)) }}
+                                            </p>
+                                            <p>
+                                                <i class="bi bi-person"></i>
+                                                {{ @$item->nama_pengurus }}
+                                            </p>
+                                        </div>
+                                        <p data-toggle="collapse" data-target="#collapse{{ $k + 1 }}">
+                                            <i class="bi bi-chevron-down"></i>
+                                        </p>
+                                    </div>
+                                </div>
 
-    <div class="row">
-        <div class="col-12 px-1">
-            @foreach ($cicilan as $item)
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <p><i class="bi bi-person"></i>
-                            <span class="text-danger">
-                                {{ @$item->nama_konsumen }}
-                            </span>
-                        </p>
-                        <p><i class="bi bi-box-seam"></i>
-                            {{ @$item->nama_barang }}
-                        </p>
-                        <p><i class="bi bi-calendar3"></i>
-                            {{ date('d/m/Y', strtotime(@$item->tanggal_angsuran)) }}
-                        </p>
-                        <hr>
-                        <p>
-                            <b>Sisa cicilan</b> <br>
-                            Rp. {{ number_format(@$item->total_cicilan) }}
-                        </p>
-                        <p>
-                            <b>Pembayaran</b> <br>
-                        <h4 class="text-danger mb-3">Rp. {{ number_format(@$item->angsuran) }}</h4>
-                        </p>
-                        {{-- <a data-toggle="modal" data-target="#modal" data-item="{{ json_encode(@$item) }}"
-                            href="javascript:void(0)" class="badge bg-info text-white" style="border-radius: 8px;">
-                            <i class="bi bi-pencil-square"></i>
-                        </a> --}}
-                        @if (Auth::id() == $item->id_user)    
-                            <a href="#" onclick="hapusData({{ @$item->id }})" class="badge bg-danger text-white"
-                                style="border-radius: 8px;">
-                                <i class="bi bi-trash"></i>
-                            </a>
-                        @endif
+                                <div id="collapse{{ $k + 1 }}" class="collapse" aria-labelledby="headingOne"
+                                    data-parent="#accordionExample">
+                                    <div class="">
+                                        <hr>
+                                        <p>
+                                            <b>Tindakan</b><br>
+                                            {{ $item->tindakan }}
+                                        </p>
+                                        <p>
+                                            <b>Keterangan</b><br>
+                                            {{ $item->keterangan }}
+                                        </p>
+                                        <a data-toggle="modal" data-target="#modal" data-item="{{ json_encode(@$item) }}"
+                                            href="javascript:void(0)" class="badge bg-info text-white"
+                                            style="border-radius: 8px;">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        <a href="#" onclick="hapusData({{ @$item->id }})"
+                                            class="badge bg-danger text-white" style="border-radius: 8px;">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            @endforeach
-            {{ $cicilan->links() }}
+                @endforeach
+                {{ $harian->links() }}
+            </div>
         </div>
     </div>
-
-
     <!-- Modal -->
     <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form id="form">
                     <div class="modal-header p-3">
-                        <h5 class="modal-title m-2" id="exampleModalLabel">Cicilan Form</h5>
+                        <h5 class="modal-title m-2" id="exampleModalLabel">Harian Form</h5>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="id" id="id">
                         <div class="form-group">
-                            <label>Cicilan Barang <sup class="text-danger">*</sup></label>
-                            <select onchange="cariData()" name="id_penjualan" id="id_penjualan"
+                            <label>Tanggal Harian <sup class="text-danger">*</sup></label>
+                            <input name="tanggal_harian" id="tanggal_harian" type="date" placeholder="Tanggal"
                                 class="form-control form-control-sm" required>
-                                <option value="">--PILIH CICILAN BARANG--</option>
-                                <?php
-                                $brg = DB::table('cicilans as c')
-                                    ->join('penjualans as p', 'p.id', '=', 'c.id_penjualan')
-                                    ->join('barangs as b', 'b.id', '=', 'p.id_barang')
-                                    ->select('p.*', 'b.nama_barang', 'c.total_cicilan')
-                                    ->whereIn('c.id', function ($query) {
-                                        $query
-                                            ->select(DB::raw('MAX(id)'))
-                                            ->from('cicilans')
-                                            ->groupBy('id_penjualan');
-                                    })
-                                    ->whereNotIn('total_cicilan', [
-                                        0
-                                    ])
-                                    ->orderBy('c.id', 'DESC')
-                                    ->get();
-                                ?>
-                                @foreach ($brg as $item)
-                                    <option value2="{{ $item->total_cicilan }}" value="{{ $item->id }}">
-                                        {{ $item->nama_konsumen }} - {{ $item->nama_barang }}</option>
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Pengurus <sup class="text-danger">*</sup></label>
+                            <select name="nama_pengurus" id="nama_pengurus" class="form-control form-control-sm" required>
+                                <option value="">PILIH NAMA PENGURUS</option>
+                                <?php $nama = DB::table('anggotas')->get(); ?>
+                                @foreach ($nama as $item)
+                                    <option>{{ $item->nama_lengkap }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Sisa Cicilan <sup class="text-danger">*</sup></label>
-                            <input type="hidden" name="sisa_cicilan" id="sisa_cicilan">
-                            <input id="sisa_cicilan1" placeholder="Sisa Cicilan" class="form-control form-control-sm"
-                                readonly>
+                            <label>Masalah <sup class="text-danger">*</sup></label>
+                            <textarea name="masalah" placeholder="masalah" id="masalah" cols="30" rows="5"
+                                class="form-control"></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Angsuran <sup class="text-danger">*</sup></label>
-                            <input type="number" placeholder="Angsuran" name="angsuran"
-                                class="form-control form-control-sm" required>
+                            <label>Tindakan <sup class="text-danger">*</sup></label>
+                            <textarea name="tindakan" placeholder="Tindakan" id="tindakan" cols="30" rows="5"
+                                class="form-control"></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Tanggal Angsuran <sup class="text-danger">*</sup></label>
-                            <input name="tanggal_angsuran" id="tanggal_angsuran" placeholder="Tanggal Angsuran"
-                                class="form-control form-control-sm" required type="date">
+                            <label>Keterangan <sup class="text-danger">*</sup></label>
+                            <textarea name="keterangan" placeholder="Keterangan" id="keterangan" cols="30" rows="5"
+                                class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer p-3 d-flex align-items-end d-flex align-items-end">
@@ -169,19 +170,6 @@
 @endsection
 @push('script')
     <script>
-        function cariData() {
-            var selectElement = document.getElementById("id_penjualan");
-            var selectedIndex = selectElement.selectedIndex;
-            var selectedOption = selectElement.options[selectedIndex];
-
-            var data2 = parseInt(selectedOption.getAttribute("value2"));
-
-            document.getElementById('sisa_cicilan').value = data2
-            document.getElementById('sisa_cicilan1').value = data2.toLocaleString('id-ID', {
-                style: 'currency',
-                currency: 'IDR'
-            })
-        }
         form.onsubmit = (e) => {
 
             let formData = new FormData(form);
@@ -192,7 +180,7 @@
 
             axios({
                     method: 'post',
-                    url: formData.get('id') == '' ? '/store-cicilan' : '/update-cicilan',
+                    url: formData.get('id') == '' ? '/store-harian' : '/update-harian',
                     data: formData,
                 })
                 .then(function(res) {
@@ -236,7 +224,7 @@
             }).then((result) => {
 
                 if (result.value) {
-                    axios.post('/delete-cicilan', {
+                    axios.post('/delete-harian', {
                             id
                         })
                         .then((response) => {
@@ -268,6 +256,7 @@
         $('#modal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var recipient = button.data('item') // Extract info from data-* attributes
+
             console.log(recipient);
 
             document.getElementById("form").reset();
@@ -277,14 +266,10 @@
             if (recipient) {
                 var modal = $(this);
                 modal.find('#id').val(recipient.id);
-                modal.find('#nama_lengkap').val(recipient.nama_lengkap);
-                modal.find('#no_cicilan').val(recipient.no_cicilan);
-                modal.find('#jabatan').val(recipient.jabatan);
-                modal.find('#tempat_lahir').val(recipient.tempat_lahir);
-                modal.find('#tanggal_lahir').val(recipient.tanggal_lahir);
-                modal.find('#agama').val(recipient.agama);
-                modal.find('#alamat').val(recipient.alamat);
-                modal.find('#no_telp').val(recipient.no_telp);
+                modal.find('#tanggal_harian').val(recipient.tanggal_harian);
+                modal.find('#masalah').val(recipient.masalah);
+                modal.find('#tindakan').val(recipient.tindakan);
+                modal.find('#nama_pengurus').val(recipient.nama_pengurus);
                 modal.find('#keterangan').val(recipient.keterangan);
             }
         })

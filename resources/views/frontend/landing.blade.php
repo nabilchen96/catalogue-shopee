@@ -57,6 +57,20 @@
             white-space: nowrap !important;
         }
 
+        .loading-indicator {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            z-index: 1000;
+        }
+
         @media only screen and (max-width: 800px) {
             .card .card-body {
                 padding: 0 0 43px 0;
@@ -102,6 +116,9 @@
 </head>
 
 <body id="body" data-spy="scroll" data-target=".navbar" data-offset="100">
+    <div class="loading-indicator" id="loadingIndicator">
+        Loading...
+    </div>
     <header id="header-section">
         <nav class="navbar navbar-expand-lg pl-3 pl-sm-0" id="navbar">
             <div class="container" data-aos="fade-down">
@@ -133,17 +150,20 @@
                                 href="{{ url('/') }}"></a>
                         </li>
                         <li class="nav-item">
-                            <a onclick="showLoadingIndicator()" class="nav-link" href="#jadwal"></a>
+                            <a class="nav-link" href="{{ url('/') }}#jadwal"></a>
                         </li>
                         <li class="nav-item">
                             <a onclick="showLoadingIndicator()" class="nav-link @if (Request::is('/')) active @endif"
                                 href="{{ url('/') }}">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#kegiatan">Kegiatan</a>
-                        </li>
+                        {{-- <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/') }}#kegiatan">Kegiatan</a>
+                        </li> --}}
                         <li class="nav-item">
                             <a onclick="showLoadingIndicator()" class="nav-link" href="{{ url('front-absensi') }}">Absensi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a onclick="showLoadingIndicator()" class="nav-link" href="{{ url('front-piket') }}">Piket</a>
                         </li>
                         <li class="nav-item">
                             <a onclick="showLoadingIndicator()" class="nav-link" href="{{ url('login') }}">Login</a>
@@ -170,9 +190,9 @@
             <br><br>
         </div>
     </div>
-    <div id="kegiatan"></div>
+    {{-- <div id="kegiatan"></div>
     <div class="content-wrapper">
-        <div class="px-3">
+        <div class="container">
             <section class="features-overview" id="features-section">
                 <div class="content-header">
                     <h2>Kegiatan dan Event</h2>
@@ -214,12 +234,14 @@
                 </div>
             </section>
         </div>
+    </div> --}}
+    <div class="container mt-4">
+        <iframe
+            class="embed-responsive"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9954462484375!2d103.33184447425226!3d-4.77073959520453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e37e59be87faa95%3A0xb9606ccf917fa103!2sKejaksaan%20Negeri%20kab.%20kaur!5e0!3m2!1sid!2sid!4v1704776625177!5m2!1sid!2sid"
+            height="450" style="border-radius: 10px; border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
-    <iframe
-        class="embed-responsive"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9954462484375!2d103.33184447425226!3d-4.77073959520453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e37e59be87faa95%3A0xb9606ccf917fa103!2sKejaksaan%20Negeri%20kab.%20kaur!5e0!3m2!1sid!2sid!4v1704776625177!5m2!1sid!2sid"
-        height="450" style="border:0;" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
 
     <div class="container">
         <footer class="border-top">
@@ -258,6 +280,36 @@
                 console.log("Service worker has been registered for scope: " + reg.scope);
             });
         }
+    </script>
+    <script>
+        // script.js
+
+        // Function to show the loading indicator
+        function showLoadingIndicator() {
+            document.getElementById('loadingIndicator').style.display = 'flex';
+        }
+
+        // Function to hide the loading indicator
+        function hideLoadingIndicator() {
+            document.getElementById('loadingIndicator').style.display = 'none';
+        }
+
+        // Event listener for popstate
+        window.addEventListener('popstate', function(event) {
+            // Show the loading indicator when navigating back
+            showLoadingIndicator();
+
+            // You may want to add additional logic here if needed
+        });
+
+        // Event listener for pageshow
+        window.addEventListener('pageshow', function(event) {
+            // Check if the page is being shown from the bfcache (back-forward cache)
+            if (event.persisted) {
+                // If it's a back-forward navigation, hide the loading indicator
+                hideLoadingIndicator();
+            }
+        });
     </script>
 </body>
 

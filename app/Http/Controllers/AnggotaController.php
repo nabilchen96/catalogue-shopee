@@ -63,6 +63,7 @@ class AnggotaController extends Controller
                 'no_telp' => $request->no_telp, 
                 'foto' => 'foto', 
                 'keterangan' => $request->keterangan, 
+                'password' => $request->password,
                 'id_user' => Auth::id()
             ]);
 
@@ -101,6 +102,7 @@ class AnggotaController extends Controller
                 'no_telp' => $request->no_telp, 
                 'foto' => 'foto', 
                 'keterangan' => $request->keterangan, 
+                'password' => $request->password
             ]);
 
             $data = [

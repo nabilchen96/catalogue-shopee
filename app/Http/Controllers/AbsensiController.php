@@ -54,6 +54,15 @@ class AbsensiController extends Controller
         $decoded_image = base64_decode($encode_image);
         $signature = date('YmdHis.').'png';
         file_put_contents("signature/".$signature, $decoded_image);
+
+        if(DB::table('anggotas')->where('id', $request->id_anggota)->value('password') != $request->password){
+            $data = [
+                'responCode' => 0,
+                'respon' => 'Password yang anda masukan salah!'
+            ];
+    
+            return response()->json($data);
+        }
         
         Absensi::create([
             'id_anggota'    => $request->id_anggota, 

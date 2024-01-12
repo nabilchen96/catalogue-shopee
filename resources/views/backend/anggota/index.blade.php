@@ -104,6 +104,7 @@
                                         {{ $item->keterangan }}
                                     </p>
                                     <p><i class="bi bi-telephone"></i> {{ @$item->no_telp }}</p>
+                                    <p><i class="bi bi-key"></i>{{ @$item->password }}</p>
                                     <span class="badge bg-info text-white"
                                         style="border-radius: 8px;">{{ @$item->role }}</span>
                                     <span class="badge bg-primary text-white"
@@ -185,6 +186,11 @@
                         <div class="form-group">
                             <label>No Telpon</label>
                             <input name="no_telp" type="text" id="no_telp" placeholder="No Telp"
+                                class="form-control form-control-sm" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input name="password" type="text" id="password" placeholder="Password"
                                 class="form-control form-control-sm" required>
                         </div>
                         <div class="form-group">
@@ -310,6 +316,7 @@
                 modal.find('#alamat').val(recipient.alamat);
                 modal.find('#no_telp').val(recipient.no_telp);
                 modal.find('#keterangan').val(recipient.keterangan);
+                modal.find('#password').val(recipient.password);
             }
         })
     </script>

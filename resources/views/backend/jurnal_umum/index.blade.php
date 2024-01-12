@@ -44,13 +44,12 @@
     </style>
 @endpush
 @section('content')
-    <a data-toggle="modal" data-target="#modal" style="bottom: 90px !important;" href="#"
-        class="bg-primary act-btn">
+    <a data-toggle="modal" data-target="#modal" style="bottom: 90px !important;" href="#" class="bg-primary act-btn">
         +
     </a>
 
-    <a href="{{ url('export-pdf-jurnal-umum') }}?tgl_awal={{ Request('tgl_awal') }}&tgl_akhir={{ Request('tgl_akhir') }}&bidang={{ Request('bidang') }}" class="bg-danger act-btn"><i style="font-size: 20px;"
-            class="bi bi-file-earmark-pdf"></i></a>
+    <a href="{{ url('export-pdf-jurnal-umum') }}?tgl_awal={{ Request('tgl_awal') }}&tgl_akhir={{ Request('tgl_akhir') }}&bidang={{ Request('bidang') }}"
+        class="bg-danger act-btn"><i style="font-size: 20px;" class="bi bi-file-earmark-pdf"></i></a>
     <div class="row" style="margin-top: -200px;">
         <div class="col-md-12 px-1">
             <div class="row">
@@ -75,11 +74,13 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label>Tanggal Mulai <sup class="text-danger">*</sup></label>
-                                    <input name="tgl_awal" value="{{ Request('tgl_awal') ?? date('Y-m-d') }}" id="tgl_awal" type="date" class="form-control form-control-sm">
+                                    <input name="tgl_awal" value="{{ Request('tgl_awal') ?? date('Y-m-d') }}" id="tgl_awal"
+                                        type="date" class="form-control form-control-sm">
                                 </div>
                                 <div class="form-group">
                                     <label>Tanggal Mulai <sup class="text-danger">*</sup></label>
-                                    <input name="tgl_akhir" value="{{ Request('tgl_akhir') ?? date('Y-m-d') }}" id="tgl_akhir" type="date" class="form-control form-control-sm">
+                                    <input name="tgl_akhir" value="{{ Request('tgl_akhir') ?? date('Y-m-d') }}"
+                                        id="tgl_akhir" type="date" class="form-control form-control-sm">
                                 </div>
                                 <div class="form-group">
                                     <label>Bidang <sup class="text-danger">*</sup></label>
@@ -87,16 +88,19 @@
                                         <option value="">--PILIH BIDANG--</option>
                                         <option {{ Request('bidang') == 'Ekonomi' ? 'selected' : '' }}>Ekonomi</option>
                                         <option {{ Request('bidang') == 'Umum' ? 'selected' : '' }}>Umum</option>
-                                        <option {{ Request('bidang') == 'Sekretariat' ? 'selected' : '' }}>Sekretariat</option>
+                                        <option {{ Request('bidang') == 'Sekretariat' ? 'selected' : '' }}>Sekretariat
+                                        </option>
                                         <option {{ Request('bidang') == 'Sosial' ? 'selected' : '' }}>Sosial</option>
-                                        <option {{ Request('bidang') == 'Pendidikan' ? 'selected' : '' }}>Pendidikan</option>
+                                        <option {{ Request('bidang') == 'Pendidikan' ? 'selected' : '' }}>Pendidikan
+                                        </option>
                                         <option {{ Request('bidang') == 'Budaya' ? 'selected' : '' }}>Budaya</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="modal-footer p-3 d-flex align-items-end d-flex align-items-end">
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn btn-danger btn-sm mr-1" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-danger btn-sm mr-1"
+                                        data-dismiss="modal">Close</button>
                                     <button id="tombol_kirim" class="btn btn-primary btn-sm">Submit</button>
                                 </div>
                             </div>
@@ -123,8 +127,7 @@
                                 <td>{{ $k + 1 }}</td>
                                 <td>{{ date('d-m-Y H:i', strtotime($item->waktu_transaksi)) }}</td>
                                 <td>
-                                    <div
-                                        style="max-width: 300px; white-space: normal !important; word-wrap: break-word;">
+                                    <div style="max-width: 300px; white-space: normal !important; word-wrap: break-word;">
                                         {{ $item->keterangan }}
                                     </div>
                                 </td>
@@ -132,15 +135,18 @@
                                 <td>Rp. {{ number_format($item->debet) }}</td>
                                 <td>Rp. {{ number_format($item->kredit) }}</td>
                                 <td>
-                                    <a href="#" onclick="hapusData({{ $item->id }})">
-                                        <i style="font-size: 1.5rem;" class="bi bi-trash text-danger"></i>
-                                    </a>
+                                    @if (Auth::id() == $item->id_user)
+                                        <a href="#" onclick="hapusData({{ $item->id }})">
+                                            <i style="font-size: 1.5rem;" class="bi bi-trash text-danger"></i>
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @empty
                             <tr>
                                 <td colspan="7" class="text-center">
-                                    Klik tombol <i data-toggle="modal" data-target="#filter" class="bi bi-search"></i> untuk melakukan pencarian untuk menampilkan data
+                                    Klik tombol <i data-toggle="modal" data-target="#filter" class="bi bi-search"></i> untuk
+                                    melakukan pencarian untuk menampilkan data
                                 </td>
                             </tr>
                         @endforelse
@@ -167,17 +173,17 @@
                         </div>
                         <div class="form-group">
                             <label>Tanggal Transaksi <sup class="text-danger">*</sup></label>
-                            <input name="tanggal_transaksi" id="tanggal_transaksi" type="datetime-local" placeholder="Debit"
-                                class="form-control form-control-sm">
+                            <input name="tanggal_transaksi" id="tanggal_transaksi" type="datetime-local"
+                                placeholder="Debit" class="form-control form-control-sm">
                         </div>
                         <div class="form-group">
                             <label>Penerimaan</label>
-                            <input name="debet" id="debet" type="number" placeholder="Debit"
+                            <input name="debet" id="debet" type="number" placeholder="Penerimaan"
                                 class="form-control form-control-sm">
                         </div>
                         <div class="form-group">
                             <label>Pengeluaran</label>
-                            <input name="kredit" id="kredit" type="number" placeholder="Kredit"
+                            <input name="kredit" id="kredit" type="number" placeholder="Pengeluaran"
                                 class="form-control form-control-sm">
                         </div>
                         <div class="form-group">

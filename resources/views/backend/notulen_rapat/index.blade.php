@@ -47,8 +47,8 @@
         <div class="row">
             <div class="col-12 px-1">
                 <div class="input-group shadow mb-3 mt-3">
-                    <input type="date" value="{{ Request('q') }}" style="border: none;"
-                        class="border-left form-control" name="q" value="{{ Request('q') ?? date('Y-m-d') }}"   >
+                    <input type="date" value="{{ Request('q') }}" style="border: none;" class="border-left form-control"
+                        name="q" value="{{ Request('q') ?? date('Y-m-d') }}">
                     <button onclick="showLoadingIndicator()" type="submit" style="border: none; height: 38px;"
                         class="input-group-text bg-primary text-white" id="basic-addon2">
                         <i class="bi bi-search"></i>
@@ -107,15 +107,17 @@
                                         <b>Hasil Rapat</b><br>
                                         {{ @$item->hasil }}
                                     </p>
-                                    <a data-toggle="modal" data-target="#modal" data-item="{{ json_encode(@$item) }}"
-                                        href="javascript:void(0)" class="badge bg-info text-white"
-                                        style="border-radius: 8px;">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                    <a href="#" onclick="hapusData({{ @$item->id }})"
-                                        class="badge bg-danger text-white" style="border-radius: 8px;">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
+                                    @if (Auth::id() == $item->id_user)
+                                        <a data-toggle="modal" data-target="#modal" data-item="{{ json_encode(@$item) }}"
+                                            href="javascript:void(0)" class="badge bg-info text-white"
+                                            style="border-radius: 8px;">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        <a href="#" onclick="hapusData({{ @$item->id }})"
+                                            class="badge bg-danger text-white" style="border-radius: 8px;">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -146,27 +148,27 @@
                                 <option>Rapat Konsultasi</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group">
                             <label>Tanggal Rapat<sup class="text-danger">*</sup></label>
                             <input name="tanggal_rapat" type="date" id="tanggal_rapat" placeholder="Tanggal Surat"
                                 class="form-control form-control-sm" required>
                         </div>
-                        
+
                         <div class="form-group">
                             <label>Tempat<sup class="text-danger">*</sup></label>
-                            <input name="tempat" type="text" id="tempat"
-                                placeholder="Tempat" class="form-control form-control-sm" required>
+                            <input name="tempat" type="text" id="tempat" placeholder="Tempat"
+                                class="form-control form-control-sm" required>
                         </div>
                         <div class="form-group">
                             <label>pimpinan<sup class="text-danger">*</sup></label>
-                            <input name="pimpinan" type="text" id="pimpinan"
-                                placeholder="pimpinan" class="form-control form-control-sm" required>
+                            <input name="pimpinan" type="text" id="pimpinan" placeholder="pimpinan"
+                                class="form-control form-control-sm" required>
                         </div>
                         <div class="form-group">
                             <label>total_hadir<sup class="text-danger">*</sup></label>
-                            <input name="total_hadir" type="number" id="total_hadir"
-                                placeholder="total_hadir" class="form-control form-control-sm" required>
+                            <input name="total_hadir" type="number" id="total_hadir" placeholder="total_hadir"
+                                class="form-control form-control-sm" required>
                         </div>
                         <div class="form-group">
                             <label>Acara <sup class="text-danger">*</sup></label>

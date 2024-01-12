@@ -57,8 +57,6 @@
         <div class="row">
             <div class="col-12 px-1">
                 <div class="input-group shadow mb-3 mt-3">
-                    {{-- <input type="text" value="{{ Request('q') }}" style="border: none;" class="form-control" name="q"
-                        placeholder="Type to Search or Clear to See All Data ..."> --}}
                     <select class="form-control" style="border: none;" name="q" id="q">
                         <option value="">Change to Search or Clear to See All Data</option>
                         <option>Kegiatan Lainnya</option>
@@ -95,10 +93,12 @@
                             background-image: url('{{ asset('no_image.jpg') }}') 
                         @endif
                         ">
-                        <a href="#" onclick="hapusData({{ @@$item->id }})" class="m-1 badge bg-danger text-white"
-                            style="border-radius: 5px;">
-                            <i class="bi bi-trash"></i>
-                        </a>
+                        @if (Auth::id() == $item->id_user)
+                            <a href="#" onclick="hapusData({{ @@$item->id }})" class="m-1 badge bg-danger text-white"
+                                style="border-radius: 5px;">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        @endif
                     </div>
                     
                 </div>

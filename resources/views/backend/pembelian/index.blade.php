@@ -120,10 +120,12 @@
                                         style="border-radius: 8px;">
                                         <i class="bi bi-pencil-square"></i>
                                     </a> --}}
+                                    @if (Auth::id() == $item->id_user)
                                     <a href="#" onclick="hapusData({{ @$item->id }})"
                                         class="badge bg-danger text-white" style="border-radius: 8px;">
                                         <i class="bi bi-trash"></i>
                                     </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>

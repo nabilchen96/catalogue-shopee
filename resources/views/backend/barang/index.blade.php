@@ -88,14 +88,16 @@
                     </div>
                     <div class="card-body p-3">
                         <p class="judul_berita mt-0 mb-2">{{ $item->nama_barang }}</p>
-                        <a data-toggle="modal" data-target="#modal" data-item="{{ json_encode(@@$item) }}" href="javascript:void(0)"
-                            class="badge bg-info text-white" style="border-radius: 8px;">
-                            <i class="bi bi-pencil-square"></i>
-                        </a>
-                        <a href="#" onclick="hapusData({{ @@$item->id }})" class="badge bg-danger text-white"
-                            style="border-radius: 8px;">
-                            <i class="bi bi-trash"></i>
-                        </a>
+                        @if (Auth::id() == $item->id_user)   
+                            <a data-toggle="modal" data-target="#modal" data-item="{{ json_encode(@@$item) }}" href="javascript:void(0)"
+                                class="badge bg-info text-white" style="border-radius: 8px;">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <a href="#" onclick="hapusData({{ @@$item->id }})" class="badge bg-danger text-white"
+                                style="border-radius: 8px;">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

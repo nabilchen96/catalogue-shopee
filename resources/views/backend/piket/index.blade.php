@@ -33,13 +33,13 @@
     </style>
 @endpush
 @section('content')
-    <a href="{{ url('export-pdf-absensi') }}" class="bg-danger act-btn"><i style="font-size: 20px;"
-            class="bi bi-file-earmark-pdf"></i></a>
+    {{-- <a href="{{ url('export-pdf-absensi') }}" class="bg-danger act-btn"><i style="font-size: 20px;"
+            class="bi bi-file-earmark-pdf"></i></a> --}}
     <div class="row" style="margin-top: -200px;">
         <div class="col-md-12 px-1">
             <div class="row">
                 <div class="col-12 col-xl-8 mb-xl-0">
-                    <h3 class="font-weight-bold">Data Absensi</h3>
+                    <h3 class="font-weight-bold">Data Piket IAD</h3>
                 </div>
             </div>
         </div>
@@ -48,12 +48,6 @@
         <div class="row">
             <div class="col-12 px-1">
                 <div class="input-group mb-3 mt-3">
-                    <select required name="j" id="j" class="border-right form-control" style="outline: none;">
-                        <option value="">Pilih Jenis Rapat</option>
-                        <option {{ Request('j') == 'Rapat Anggota Inti' ? 'selected' : '' }}>Rapat Anggota Inti</option>
-                        <option {{ Request('j') == 'Rapat Seluruh Anggota' ? 'selected' : '' }}>Rapat Seluruh Anggota</option>
-                        <option {{ Request('j') == 'Rapat Konsultasi' ? 'selected' : '' }}>Rapat Konsultasi</option>
-                    </select>
                     <input type="date" value="<?php echo Request('q') ?? date('Y-m-d');?>" style="border: none;" class="border-left form-control"
                         name="q" placeholder="Pilih Tanggal">
                     <button type="submit" style="border: none; height: 38px;"
@@ -75,19 +69,17 @@
                                     <th width="5%">No</th>
                                     <th>Nama Lengkap</th>
                                     <th>Jabatan</th>
-                                    <th>Jenis Rapat</th>
                                     <th>Tanggal</th>
                                     <th class="text-center">Tanda Tangan</th>
                                     <th width="5%"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($absensi as $k => $item)
+                                @foreach ($piket as $k => $item)
                                     <tr>
                                         <td>{{ $k + 1 }}</td>
                                         <td>{{ $item->nama_lengkap }}</td>
                                         <td>{{ $item->jabatan }}</td>
-                                        <td>{{ $item->jenis_rapat }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>
                                             <div class="border"
@@ -99,7 +91,7 @@
                                             background-size: cover;
                                             background-position: center;
                                             item-align: center;
-                                            @if ($item->signature) background-image: url('{{ asset('signature') }}/{{ $item->signature }}');
+                                            @if ($item->tanda_tangan) background-image: url('{{ asset('signature') }}/{{ $item->tanda_tangan }}');
                                             @else 
                                                 background-image: url('{{ asset('no_image.jpg') }}'); @endif    
                                             ">
@@ -114,7 +106,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                                {{ $absensi->links() }}
+                                {{ $piket->links() }}
                             </tbody>
                         </table>
                     </div>
@@ -138,7 +130,7 @@
             }).then((result) => {
 
                 if (result.value) {
-                    axios.post('/delete-absensi', {
+                    axios.post('/delete-piket', {
                             id
                         })
                         .then((response) => {

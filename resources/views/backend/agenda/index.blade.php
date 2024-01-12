@@ -72,14 +72,16 @@
                         <p><i class="bi bi-geo-alt"></i> {{ @$item->tempat }} </p>
                         <p><i class="bi bi-file-earmark-text"></i> {{ @$item->keterangan }}</p>
                         <p class="badge bg-info text-white">{{ @$item->bidang }}</p>
-                        <a data-toggle="modal" data-target="#modal" data-item="{{ json_encode(@$item) }}"
-                            href="javascript:void(0)" class="badge bg-info text-white" style="border-radius: 8px;">
-                            <i class="bi bi-pencil-square"></i>
-                        </a>
-                        <a href="#" onclick="hapusData({{ @$item->id }})" class="badge bg-danger text-white"
-                            style="border-radius: 8px;">
-                            <i class="bi bi-trash"></i>
-                        </a>
+                        @if (Auth::id() == $item->id_user)    
+                            <a data-toggle="modal" data-target="#modal" data-item="{{ json_encode(@$item) }}"
+                                href="javascript:void(0)" class="badge bg-info text-white" style="border-radius: 8px;">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <a href="#" onclick="hapusData({{ @$item->id }})" class="badge bg-danger text-white"
+                                style="border-radius: 8px;">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        @endif
                     </div>
                 </div>
             @endforeach

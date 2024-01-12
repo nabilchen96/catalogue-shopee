@@ -22,6 +22,10 @@ Route::post('/loginProses', 'App\Http\Controllers\AuthController@loginProses');
 Route::get('/front-absensi', 'App\Http\Controllers\AbsensiController@frontAbsensi');
 Route::post('/absensi-store', 'App\Http\Controllers\AbsensiController@store');
 
+//PIKET
+Route::get('/front-piket', 'App\Http\Controllers\PiketController@frontPiket');
+Route::post('/piket-store', 'App\Http\Controllers\PiketController@store');
+
 Route::get('/', function () {
     return view('frontend.landing');
 });
@@ -114,6 +118,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/delete-absensi', 'App\Http\Controllers\AbsensiController@delete');
     Route::get('/export-pdf-absensi', 'App\Http\Controllers\AbsensiController@exportPdf');
 
+    //PIKET
+    Route::get('/piket', 'App\Http\Controllers\PiketController@index');
+    Route::get('/data-piket', 'App\Http\Controllers\PiketController@data');
+    Route::post('/delete-piket', 'App\Http\Controllers\PiketController@delete');
+
     //JURNAL UMUM
     Route::get('/jurnal-umum', 'App\Http\Controllers\JurnalUmumController@index');
     Route::get('/data-jurnal-umum', 'App\Http\Controllers\JurnalUmumController@data');
@@ -135,6 +144,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/store-foto-kegiatan', 'App\Http\Controllers\FotoKegiatanController@store');
     Route::post('/update-foto-kegiatan', 'App\Http\Controllers\FotoKegiatanController@update');
     Route::post('/delete-foto-kegiatan', 'App\Http\Controllers\FotoKegiatanController@delete');
+
+    //HARIAN
+    Route::get('/harian', 'App\Http\Controllers\HarianController@index');
+    Route::get('/data-harian', 'App\Http\Controllers\HarianController@data');
+    Route::post('/store-harian', 'App\Http\Controllers\HarianController@store');
+    Route::post('/update-harian', 'App\Http\Controllers\HarianController@update');
+    Route::post('/delete-harian', 'App\Http\Controllers\HarianController@delete');
 
 });
 

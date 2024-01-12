@@ -20,6 +20,18 @@
                 <span class="menu-title">Agenda</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a onclick="showLoadingIndicator()" class="nav-link" href="{{ url('harian') }}">
+                <i class="bi bi-book menu-icon"></i>
+                <span class="menu-title">Harian IAD</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a onclick="showLoadingIndicator()" class="nav-link" href="{{ url('piket') }}">
+                <i class="bi bi-calendar menu-icon"></i>
+                <span class="menu-title">Piket IAD</span>
+            </a>
+        </li>
         @if (Auth::user()->role == 'Sekretariat' || Auth::user()->role == 'Admin')            
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#mr" aria-expanded="false" aria-controls="ui-basic">
