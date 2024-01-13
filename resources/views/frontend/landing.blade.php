@@ -156,14 +156,14 @@
                             <a onclick="showLoadingIndicator()" class="nav-link @if (Request::is('/')) active @endif"
                                 href="{{ url('/') }}">Home</a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/') }}#kegiatan">Kegiatan</a>
-                        </li> --}}
                         <li class="nav-item">
                             <a onclick="showLoadingIndicator()" class="nav-link" href="{{ url('front-absensi') }}">Absensi</a>
                         </li>
                         <li class="nav-item">
                             <a onclick="showLoadingIndicator()" class="nav-link" href="{{ url('front-piket') }}">Piket</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ asset('panduan.pdf') }}">Panduan</a>
                         </li>
                         <li class="nav-item">
                             <a onclick="showLoadingIndicator()" class="nav-link" href="{{ url('login') }}">Login</a>
