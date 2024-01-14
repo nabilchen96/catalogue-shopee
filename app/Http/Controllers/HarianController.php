@@ -47,7 +47,7 @@ class HarianController extends Controller
             ];
         } else {
             $data = Harian::create([
-                'tanggal' => $request->tanggal, 
+                'tanggal_harian' => $request->tanggal_harian, 
                 'nama_pengurus' => $request->nama_pengurus, 
                 'masalah' => $request->masalah, 
                 'tindakan' => $request->tindakan, 
