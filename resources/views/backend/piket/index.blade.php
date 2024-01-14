@@ -48,7 +48,7 @@
         <div class="row">
             <div class="col-12 px-1">
                 <div class="input-group mb-3 mt-3">
-                    <input type="date" value="<?php echo Request('q') ?? date('Y-m-d');?>" style="border: none;" class="border-left form-control"
+                    <input type="date" value="<?php echo Request('q') ?? date('Y-m-d'); ?>" style="border: none;" class="border-left form-control"
                         name="q" placeholder="Pilih Tanggal">
                     <button type="submit" style="border: none; height: 38px;"
                         class="input-group-text bg-primary text-white" id="basic-addon2">
@@ -75,7 +75,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($piket as $k => $item)
+                                @forelse ($piket as $k => $item)
                                     <tr>
                                         <td>{{ $k + 1 }}</td>
                                         <td>{{ $item->nama_lengkap }}</td>
@@ -105,7 +105,13 @@
                                             @endif
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center">
+                                            Cari tanggal untuk menampilkan data yang sesuai
+                                        </td>
+                                    </tr>
+                                @endforelse
                                 {{ $piket->links() }}
                             </tbody>
                         </table>
