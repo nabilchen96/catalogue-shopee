@@ -24,6 +24,7 @@ Route::post('/loginProses', 'App\Http\Controllers\AuthController@loginProses');
 
 //BARANG
 Route::get('/produk/{id}', 'App\Http\Controllers\BarangController@front');
+Route::get('/', 'App\Http\Controllers\BarangController@frontC');
 Route::get('/detail-barang/{id}', 'App\Http\Controllers\BarangController@detailBarang');
 
 //BACKEND

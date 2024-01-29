@@ -289,6 +289,26 @@ class BarangController extends Controller
 
     }
 
+    public function frontC()
+    {
+        $q = explode(' ', Request('q'));
+        $barang = DB::table('barangs')->where('status', 'Aktif');
+
+        
+        foreach ($q as $keyword) {
+            $barang = $barang->where('nama_barang', 'like', '%' . $keyword . '%');
+        }
+
+        // Append query parameters to pagination links
+        $barang = $barang->orderBy('id', 'DESC')->paginate(30)->appends(['q' => Request('q')]);
+        
+
+        return view('frontend.barang', [
+            'barang' => $barang
+        ]);
+
+    }
+
     public function detailBarang($id)
     {
         $barang = DB::table('barangs')->where('slug', $id)->first();
