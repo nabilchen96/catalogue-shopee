@@ -89,6 +89,7 @@
                         <th>Terjual</th>
                         <th>Harga Start</th>
                         <th>Harga End</th>
+                        <th>Link Afiliasi</th>
                         <th>Created</th>
                         <th width="5%"></th>
                         <th width="5%"></th>
@@ -193,6 +194,7 @@
                             <td>{{ $item->terjual }}</td>
                             <td>Rp. {{ number_format($item->harga_start) }}</td>
                             <td>Rp. {{ number_format($item->harga_end) }}</td>
+                            <td><a target="_blank" href="{{ $item->afiliasi_url }}">{{ $item->afiliasi_url }}</a></td>
                             <td>{{ $item->created_at }}</td>
                             <td>
                                 <a data-toggle="modal" data-target="#modal" data-item="{{ json_encode($item) }}"

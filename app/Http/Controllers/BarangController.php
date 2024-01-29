@@ -22,11 +22,13 @@ class BarangController extends Controller
         if ($q) {
             $barang = $barang->where('nama_barang', 'like', '%' . $q . '%')
                 ->orWhere('kategori', 'like', '%' . $q . '%')
-                // ->orderBy('id', 'DESC')
                 ->orderBy('status', 'ASC')
+                ->orderBy('afiliasi_url', 'ASC')
                 ->paginate(10);
         } else {
-            $barang = $barang->orderBy('status', 'ASC')->paginate(10);
+            $barang = $barang
+            ->orderBy('afiliasi_url', 'ASC')
+            ->orderBy('status', 'ASC')->paginate(10);
         }
 
         return view('backend.barang.index', [
