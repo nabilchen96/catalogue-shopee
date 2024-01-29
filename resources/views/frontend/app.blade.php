@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
-    
+
     @stack('meta-description')
     @stack('style')
     <style>
@@ -142,7 +142,7 @@
 
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item nav-profile dropdown">
-                        <img style="border-radius: 0;" src="{{ url('sahretech.png') }}" alt="">                       
+                        <img style="border-radius: 0;" src="{{ url('sahretech.png') }}" alt="">
                     </li>
 
                 </ul>
@@ -321,6 +321,20 @@
             }
         });
     </script>
+    <!-- Default Statcounter code for Catalogue Sungky
+https://catalogue.sungky.com/ -->
+    <script type="text/javascript">
+        var sc_project = 12961886;
+        var sc_invisible = 1;
+        var sc_security = "8611ff7f";
+    </script>
+    <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+    <noscript>
+        <div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img
+                    class="statcounter" src="https://c.statcounter.com/12961886/0/8611ff7f/1/" alt="Web Analytics"
+                    referrerPolicy="no-referrer-when-downgrade"></a></div>
+    </noscript>
+    <!-- End of Statcounter Code -->
 </body>
 
 </html>
