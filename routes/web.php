@@ -13,22 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// SITEMAP
+Route::get('/sitemap.xml', 'App\Http\Controllers\SitemapController@index');
+
 
 //LOGIN
 Route::get('/login', 'App\Http\Controllers\AuthController@login')->name('login');
 Route::post('/loginProses', 'App\Http\Controllers\AuthController@loginProses');
 
-//ABSENSI
-Route::get('/front-absensi', 'App\Http\Controllers\AbsensiController@frontAbsensi');
-Route::post('/absensi-store', 'App\Http\Controllers\AbsensiController@store');
 
-//PIKET
-Route::get('/front-piket', 'App\Http\Controllers\PiketController@frontPiket');
-Route::post('/piket-store', 'App\Http\Controllers\PiketController@store');
-
-Route::get('/', function () {
-    return view('frontend.landing');
-});
+//BARANG
+Route::get('/produk/{id}', 'App\Http\Controllers\BarangController@front');
+Route::get('/detail-barang/{id}', 'App\Http\Controllers\BarangController@detailBarang');
 
 //BACKEND
 Route::group(['middleware' => 'auth'], function () {
@@ -43,115 +39,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/update-user', 'App\Http\Controllers\UserController@update');
     Route::post('/delete-user', 'App\Http\Controllers\UserController@delete');
 
-    //AGENDA
-    Route::get('/agenda', 'App\Http\Controllers\AgendaController@index');
-    Route::get('/data-agenda', 'App\Http\Controllers\AgendaController@data');
-    Route::post('/store-agenda', 'App\Http\Controllers\AgendaController@store');
-    Route::post('/update-agenda', 'App\Http\Controllers\AgendaController@update');
-    Route::post('/delete-agenda', 'App\Http\Controllers\AgendaController@delete');
-
-
-    //ANGGOTA
-    Route::get('/anggota', 'App\Http\Controllers\AnggotaController@index');
-    Route::get('/data-anggota', 'App\Http\Controllers\AnggotaController@data');
-    Route::post('/store-anggota', 'App\Http\Controllers\AnggotaController@store');
-    Route::post('/update-anggota', 'App\Http\Controllers\AnggotaController@update');
-    Route::post('/delete-anggota', 'App\Http\Controllers\AnggotaController@delete');
-
-    //SURAT MASUK
-    Route::get('/surat-masuk', 'App\Http\Controllers\SuratMasukController@index');
-    Route::get('/data-surat-masuk', 'App\Http\Controllers\SuratMasukController@data');
-    Route::post('/store-surat-masuk', 'App\Http\Controllers\SuratMasukController@store');
-    Route::post('/update-surat-masuk', 'App\Http\Controllers\SuratMasukController@update');
-    Route::post('/delete-surat-masuk', 'App\Http\Controllers\SuratMasukController@delete');
-
-    //SURAT KELUAR
-    Route::get('/surat-keluar', 'App\Http\Controllers\SuratKeluarController@index');
-    Route::get('/data-surat-keluar', 'App\Http\Controllers\SuratKeluarController@data');
-    Route::post('/store-surat-keluar', 'App\Http\Controllers\SuratKeluarController@store');
-    Route::post('/update-surat-keluar', 'App\Http\Controllers\SuratKeluarController@update');
-    Route::post('/delete-surat-keluar', 'App\Http\Controllers\SuratKeluarController@delete');
-
-    //INVENTARIS
-    Route::get('/inventaris', 'App\Http\Controllers\InventarisController@index');
-    Route::get('/data-inventaris', 'App\Http\Controllers\InventarisController@data');
-    Route::post('/store-inventaris', 'App\Http\Controllers\InventarisController@store');
-    Route::post('/update-inventaris', 'App\Http\Controllers\InventarisController@update');
-    Route::post('/delete-inventaris', 'App\Http\Controllers\InventarisController@delete');
-
     //BARANG
     Route::get('/barang', 'App\Http\Controllers\BarangController@index');
     Route::get('/data-barang', 'App\Http\Controllers\BarangController@data');
     Route::post('/store-barang', 'App\Http\Controllers\BarangController@store');
     Route::post('/update-barang', 'App\Http\Controllers\BarangController@update');
     Route::post('/delete-barang', 'App\Http\Controllers\BarangController@delete');
-
-    //PEMBELIAN
-    Route::get('/pembelian', 'App\Http\Controllers\PembelianController@index');
-    Route::get('/data-pembelian', 'App\Http\Controllers\PembelianController@data');
-    Route::post('/store-pembelian', 'App\Http\Controllers\PembelianController@store');
-    Route::post('/update-pembelian', 'App\Http\Controllers\PembelianController@update');
-    Route::post('/delete-pembelian', 'App\Http\Controllers\PembelianController@delete');
-
-    //Penjualan
-    Route::get('/penjualan', 'App\Http\Controllers\PenjualanController@index');
-    Route::get('/data-penjualan', 'App\Http\Controllers\PenjualanController@data');
-    Route::post('/store-penjualan', 'App\Http\Controllers\PenjualanController@store');
-    Route::post('/update-penjualan', 'App\Http\Controllers\PenjualanController@update');
-    Route::post('/delete-penjualan', 'App\Http\Controllers\PenjualanController@delete');
-
-    //cicilan
-    Route::get('/cicilan', 'App\Http\Controllers\CicilanController@index');
-    Route::get('/data-cicilan', 'App\Http\Controllers\CicilanController@data');
-    Route::post('/store-cicilan', 'App\Http\Controllers\CicilanController@store');
-    Route::post('/update-cicilan', 'App\Http\Controllers\CicilanController@update');
-    Route::post('/delete-cicilan', 'App\Http\Controllers\CicilanController@delete');
-
-    //stok
-    Route::get('/stok', 'App\Http\Controllers\StokController@index');
-    Route::get('/data-stok', 'App\Http\Controllers\StokController@data');
-    Route::get('/export-pdf-stok', 'App\Http\Controllers\StokController@exportPdf');
-
-    //ABSENSI
-    Route::get('/absensi', 'App\Http\Controllers\AbsensiController@index');
-    Route::get('/data-absensi', 'App\Http\Controllers\AbsensiController@data');
-    Route::post('/delete-absensi', 'App\Http\Controllers\AbsensiController@delete');
-    Route::get('/export-pdf-absensi', 'App\Http\Controllers\AbsensiController@exportPdf');
-
-    //PIKET
-    Route::get('/piket', 'App\Http\Controllers\PiketController@index');
-    Route::get('/data-piket', 'App\Http\Controllers\PiketController@data');
-    Route::post('/delete-piket', 'App\Http\Controllers\PiketController@delete');
-
-    //JURNAL UMUM
-    Route::get('/jurnal-umum', 'App\Http\Controllers\JurnalUmumController@index');
-    Route::get('/data-jurnal-umum', 'App\Http\Controllers\JurnalUmumController@data');
-    Route::post('/store-jurnal-umum', 'App\Http\Controllers\JurnalUmumController@store');
-    Route::post('/update-jurnal-umum', 'App\Http\Controllers\JurnalUmumController@update');
-    Route::post('/delete-jurnal-umum', 'App\Http\Controllers\JurnalUmumController@delete');
-    Route::get('/export-pdf-jurnal-umum', 'App\Http\Controllers\JurnalUmumController@exportPdf');
-
-    //NOTULEN RAPAT
-    Route::get('/notulen-rapat', 'App\Http\Controllers\NotulenRapatController@index');
-    Route::get('/data-notulen-rapat', 'App\Http\Controllers\NotulenRapatController@data');
-    Route::post('/store-notulen-rapat', 'App\Http\Controllers\NotulenRapatController@store');
-    Route::post('/update-notulen-rapat', 'App\Http\Controllers\NotulenRapatController@update');
-    Route::post('/delete-notulen-rapat', 'App\Http\Controllers\NotulenRapatController@delete');
-
-    //FOTO KEGIATAN
-    Route::get('/foto-kegiatan', 'App\Http\Controllers\FotoKegiatanController@index');
-    Route::get('/data-foto-kegiatan', 'App\Http\Controllers\FotoKegiatanController@data');
-    Route::post('/store-foto-kegiatan', 'App\Http\Controllers\FotoKegiatanController@store');
-    Route::post('/update-foto-kegiatan', 'App\Http\Controllers\FotoKegiatanController@update');
-    Route::post('/delete-foto-kegiatan', 'App\Http\Controllers\FotoKegiatanController@delete');
-
-    //HARIAN
-    Route::get('/harian', 'App\Http\Controllers\HarianController@index');
-    Route::get('/data-harian', 'App\Http\Controllers\HarianController@data');
-    Route::post('/store-harian', 'App\Http\Controllers\HarianController@store');
-    Route::post('/update-harian', 'App\Http\Controllers\HarianController@update');
-    Route::post('/delete-harian', 'App\Http\Controllers\HarianController@delete');
-
+    Route::post('/import-barang', 'App\Http\Controllers\BarangController@import');
+    Route::post('/upload-gambar-barang', 'App\Http\Controllers\BarangController@uploadGambar');
 });
 
 //LOGOUT

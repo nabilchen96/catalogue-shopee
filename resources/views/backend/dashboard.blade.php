@@ -119,7 +119,7 @@
                     <div class="card card-light-danger text-white shadow pt-2 mb-2">
                         <div class="card-body p-4">
                             <h4 class="mb-4">Sisa Cicilan</h4>
-                            <h3 class="fs-30 mb-2">Rp. {{ number_format($cicilan) ?? 0 }}</h3>
+                            <h3 class="fs-30 mb-2">Rp. {{ number_format(@$cicilan) ?? 0 }}</h3>
                             <span>
                                 <a href="{{ url('cicilan') }}" class="text-white">
                                     List Cicilan <i class="bi bi-arrow-right"></i>
