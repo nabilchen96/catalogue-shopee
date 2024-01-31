@@ -323,7 +323,7 @@
     </script>
     <!-- Default Statcounter code for Catalogue Sungky
 https://catalogue.sungky.com/ -->
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
         var sc_project = 12961886;
         var sc_invisible = 1;
         var sc_security = "8611ff7f";
@@ -333,7 +333,7 @@ https://catalogue.sungky.com/ -->
         <div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img
                     class="statcounter" src="https://c.statcounter.com/12961886/0/8611ff7f/1/" alt="Web Analytics"
                     referrerPolicy="no-referrer-when-downgrade"></a></div>
-    </noscript> --}}
+    </noscript>
     <!-- End of Statcounter Code -->
 </body>
 
